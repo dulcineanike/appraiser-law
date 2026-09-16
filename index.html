@@ -141,11 +141,26 @@
     </div>
   </div>
 
+  <!-- Floating Audio Player Bar -->
+  <div class="audio-player-bar" id="audioPlayerBar">
+    <div class="player-info">
+      <span class="pulse-dot"></span>
+      <span id="playerTitle">正在朗讀：第 1 條</span>
+    </div>
+    <div class="player-controls">
+      <button class="btn-player" id="btnPlayerToggle" title="播放/暫停">⏸ 暫停</button>
+      <button class="btn-player" id="btnPlayerNext" title="朗讀下一條">⏭ 下一條</button>
+      <button class="btn-player" id="btnPlayerSpeed" title="切換語速">1.0x</button>
+      <button class="btn-player-close" id="btnPlayerClose" title="停止朗讀">✕</button>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toast">已複製引用格式</div>
 
   <!-- Scripts -->
   <script src="./js/search.js"></script>
+  <script src="./js/tts.js"></script>
   <script src="./js/app.js"></script>
 </body>
 </html>

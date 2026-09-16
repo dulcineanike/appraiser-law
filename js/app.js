@@ -37,8 +37,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     modalCloseBtn: document.getElementById('modalCloseBtn'),
     toast: document.getElementById('toast'),
     navTabs: document.querySelectorAll('.nav-tab-btn'),
-    fabJump: document.getElementById('fabJump')
+    fabJump: document.getElementById('fabJump'),
+    audioPlayerBar: document.getElementById('audioPlayerBar'),
+    playerTitle: document.getElementById('playerTitle'),
+    btnPlayerToggle: document.getElementById('btnPlayerToggle'),
+    btnPlayerNext: document.getElementById('btnPlayerNext'),
+    btnPlayerSpeed: document.getElementById('btnPlayerSpeed'),
+    btnPlayerClose: document.getElementById('btnPlayerClose')
   };
+
+  const ttsPlayer = new LawTTSPlayer();
 
   // Apply Theme & Font size
   document.documentElement.setAttribute('data-theme', state.theme);
@@ -334,6 +342,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="article-header">
             <span class="article-no">${art.rawNo}</span>
             <div class="article-tools">
+              <button class="btn-tool btn-tts" data-law="${law.name}" data-art-no="${art.rawNo}" data-num="${art.num}" title="語音朗讀此條文">
+                🔊 朗讀
+              </button>
               <button class="btn-tool btn-copy-citation" data-law="${law.name}" data-art-no="${art.rawNo}" data-num="${art.num}" title="一鍵複製報告書引用格式">
                 📋 複製引用
               </button>
@@ -481,6 +492,29 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
 
+    // 語音朗讀按鈕
+    el.mainContent.querySelectorAll('.btn-tts').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const lawName = btn.getAttribute('data-law');
+        const artNo = btn.getAttribute('data-art-no');
+        const num = btn.getAttribute('data-num');
+        const card = btn.closest('.article-card');
+        const paragraphs = Array.from(card.querySelectorAll('.article-paragraph')).map(p => p.innerText.trim());
+
+        if (ttsPlayer.isPlaying && ttsPlayer.currentArticleData && ttsPlayer.currentArticleData.num === num) {
+          if (ttsPlayer.isPaused) {
+            ttsPlayer.resume();
+          } else {
+            ttsPlayer.pause();
+          }
+        } else {
+          ttsPlayer.play(lawName, artNo, num, paragraphs, true);
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+
     // 交叉參照點擊
     el.mainContent.querySelectorAll('.ref-link').forEach(link => {
       link.addEventListener('click', (e) => {
@@ -490,6 +524,78 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
   }
+
+  // 設定語音朗讀回呼與浮動控制列
+  ttsPlayer.onStatusChange = (status, data) => {
+    document.querySelectorAll('.article-card.reading').forEach(c => c.classList.remove('reading'));
+    document.querySelectorAll('.btn-tool.btn-tts.active').forEach(b => {
+      b.classList.remove('active');
+      b.innerHTML = '🔊 朗讀';
+    });
+
+    if (status === 'playing' || status === 'paused') {
+      el.audioPlayerBar.classList.add('active');
+      el.playerTitle.textContent = `朗讀中：《${data.lawName}》${data.rawNo}`;
+      el.btnPlayerToggle.textContent = status === 'playing' ? '⏸ 暫停' : '▶ 播放';
+
+      const card = document.getElementById(`art-${data.num}`);
+      if (card) {
+        card.classList.add('reading');
+        const btn = card.querySelector('.btn-tts');
+        if (btn) {
+          btn.classList.add('active');
+          btn.innerHTML = status === 'playing' ? '⏸ 暫停' : '▶ 播放';
+        }
+      }
+    } else {
+      el.audioPlayerBar.classList.remove('active');
+    }
+  };
+
+  ttsPlayer.onNextArticle = (currentNum) => {
+    const law = state.lawsData.find(l => l.id === state.currentLawId);
+    if (!law) return;
+    const currentIdx = law.articles.findIndex(a => a.num === currentNum);
+    if (currentIdx >= 0 && currentIdx + 1 < law.articles.length) {
+      const nextArt = law.articles[currentIdx + 1];
+      ttsPlayer.play(law.name, nextArt.rawNo, nextArt.num, nextArt.paragraphs, true);
+      const nextCard = document.getElementById(`art-${nextArt.num}`);
+      if (nextCard) {
+        nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else {
+      showToast('已朗讀完本法規全部條文');
+    }
+  };
+
+  el.btnPlayerToggle?.addEventListener('click', () => {
+    if (ttsPlayer.isPaused) {
+      ttsPlayer.resume();
+    } else if (ttsPlayer.isPlaying) {
+      ttsPlayer.pause();
+    }
+  });
+
+  el.btnPlayerNext?.addEventListener('click', () => {
+    if (ttsPlayer.currentArticleData) {
+      ttsPlayer.onNextArticle(ttsPlayer.currentArticleData.num);
+    }
+  });
+
+  el.btnPlayerSpeed?.addEventListener('click', () => {
+    const rates = ['0.8', '1.0', '1.2', '1.5'];
+    let current = ttsPlayer.rate.toFixed(1);
+    let idx = rates.indexOf(current);
+    if (idx === -1) idx = 1;
+    const nextRate = rates[(idx + 1) % rates.length];
+    ttsPlayer.setRate(nextRate);
+    el.btnPlayerSpeed.textContent = `${nextRate}x`;
+    showToast(`語速已調整為 ${nextRate}x`);
+  });
+
+  el.btnPlayerClose?.addEventListener('click', () => {
+    ttsPlayer.stop();
+  });
 
   // Cross Reference Modal
   function openCrossReferenceModal(refStr) {
