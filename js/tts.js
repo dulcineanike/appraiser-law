@@ -38,9 +38,13 @@ class LawTTSPlayer {
 
   /**
    * 整理條文文字為自然語音朗讀文字
+   * @param {string} rawNo 條號字串（例如「第 1 條」）
+   * @param {string[]} paragraphs 條文段落陣列
+   * @param {string|null} lawName 法規名稱（若未指定或為 null 則不唸出，避免條條重複唸法規名稱）
    */
-  prepareSpeechText(lawName, rawNo, paragraphs) {
-    let cleanText = `${lawName}，${rawNo}。 `;
+  prepareSpeechText(rawNo, paragraphs, lawName = null) {
+    // 朗讀時以條號開頭（如「第一條。」），不重複唸「土地法 第一條」、「土地法 第二條」等法規名稱
+    let cleanText = lawName ? `${lawName}，${rawNo}。 ` : `${rawNo}。 `;
     paragraphs.forEach((p, idx) => {
       let t = p.trim();
       // 替換常用法條符號，讓語音更通順
@@ -55,15 +59,25 @@ class LawTTSPlayer {
            .replace(/NOI/gi, '淨營運收益')
            .replace(/DCF/gi, '折現現金流量')
            .replace(/REITs/gi, '不動產投資信託');
-      cleanText += t + '。 ';
+      if (!/[。；：！？]$/.test(t)) {
+        cleanText += t + '。 ';
+      } else {
+        cleanText += t + ' ';
+      }
     });
-    return cleanText;
+    return cleanText.trim();
   }
 
   /**
    * 播放指定條文
+   * @param {string} lawName 法規名稱（供浮動播放列顯示使用）
+   * @param {string} rawNo 條號字串（例如「第 1 條」）
+   * @param {string} num 條號數字
+   * @param {string[]} paragraphs 條文段落
+   * @param {boolean} autoNext 是否連續朗讀下一條
+   * @param {boolean} includeLawName 語音內容是否包含法規名稱（預設 false，不重複唸）
    */
-  play(lawName, rawNo, num, paragraphs, autoNext = true) {
+  play(lawName, rawNo, num, paragraphs, autoNext = true, includeLawName = false) {
     this.stop();
 
     if (!this.synth) {
@@ -71,8 +85,8 @@ class LawTTSPlayer {
       return;
     }
 
-    this.currentArticleData = { lawName, rawNo, num, paragraphs, autoNext };
-    const speechText = this.prepareSpeechText(lawName, rawNo, paragraphs);
+    this.currentArticleData = { lawName, rawNo, num, paragraphs, autoNext, includeLawName };
+    const speechText = this.prepareSpeechText(rawNo, paragraphs, includeLawName ? lawName : null);
 
     const utterance = new SpeechSynthesisUtterance(speechText);
     utterance.lang = 'zh-TW';
@@ -141,7 +155,7 @@ class LawTTSPlayer {
     // 若正在播放，重啟以套用語速
     if (this.isPlaying && this.currentArticleData) {
       const d = this.currentArticleData;
-      this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext);
+      this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
     }
   }
 
