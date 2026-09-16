@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)" />
+  <!-- Border inner highlight -->
+  <rect x="16" y="16" width="480" height="480" rx="88" fill="none" stroke="#3b82f6" stroke-width="6" opacity="0.3" />
+  
+  <!-- Scale / Balance Symbol for Valuation & Law -->
+  <g transform="translate(256, 230)">
+    <!-- Base pillar -->
+    <rect x="-10" y="-120" width="20" height="230" rx="8" fill="url(#gold)" />
+    <!-- Pedestal -->
+    <path d="M-70 110 L70 110 L90 140 L-90 140 Z" fill="url(#gold)" />
+    <!-- Beam -->
+    <path d="M-150 -100 L150 -100 L140 -86 L-140 -86 Z" fill="url(#gold)" />
+    <!-- Center top finial -->
+    <circle cx="0" cy="-125" r="18" fill="url(#gold)" />
+    
+    <!-- Left pan strings & pan -->
+    <line x1="-140" y1="-90" x2="-185" y2="-10" stroke="#fef08a" stroke-width="4" />
+    <line x1="-140" y1="-90" x2="-95" y2="-10" stroke="#fef08a" stroke-width="4" />
+    <path d="M-195 -10 Q-140 35 -85 -10 Z" fill="url(#gold)" />
+    
+    <!-- Right pan strings & pan -->
+    <line x1="140" y1="-90" x2="95" y2="-10" stroke="#fef08a" stroke-width="4" />
+    <line x1="140" y1="-90" x2="185" y2="-10" stroke="#fef08a" stroke-width="4" />
+    <path d="M85 -10 Q140 35 195 -10 Z" fill="url(#gold)" />
+
+    <!-- Building silhouette inside left pan (Property) -->
+    <rect x="-155" y="-55" width="30" height="42" rx="3" fill="#60a5fa" opacity="0.9" />
+    <polygon points="-160,-55 -140,-75 -120,-55" fill="#93c5fd" />
+    <!-- Book/Gavel inside right pan (Law) -->
+    <rect x="125" y="-45" width="30" height="32" rx="4" fill="#38bdf8" opacity="0.9" />
+    <line x1="133" y1="-45" x2="133" y2="-13" stroke="#0f172a" stroke-width="3" />
+  </g>
+
+  <!-- Title Text -->
+  <text x="256" y="425" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif" font-size="52" font-weight="bold" fill="#ffffff" letter-spacing="4">估價小六法</text>
+  <text x="256" y="465" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="600" fill="#94a3b8" letter-spacing="3">APPRAISER CODE</text>
+</svg>
