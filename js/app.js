@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     lawsData: [],
     bulletinsData: [],
     currentView: 'reader', // 'reader', 'search', 'bulletins', 'bookmarks'
-    currentLawId: '不動產估價技術規則',
+    currentLawId: '民法',
     currentCategory: 'all',
     currentSearchQuery: '',
     fontSize: localStorage.getItem('val_font_size') || '16',
@@ -236,12 +236,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderCategories() {
     const cats = [
       { id: 'all', name: '全部法規' },
+      { id: 'civil', name: '民事產權' },
       { id: 'valuation', name: '估價技術' },
       { id: 'exam', name: '考試大綱' },
-      { id: 'civil', name: '民事產權' },
-      { id: 'landuse', name: '土地利用' },
+      { id: 'tax', name: '稅制公產' },
       { id: 'redevelopment', name: '都更重劃' },
-      { id: 'tax', name: '稅制公產' }
+      { id: 'landuse', name: '土地利用' }
     ];
 
     el.categoryContainer.innerHTML = cats.map(c => `
@@ -343,13 +343,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             <span class="article-no">${art.rawNo}</span>
             <div class="article-tools">
               <button class="btn-tool btn-tts" data-law="${law.name}" data-art-no="${art.rawNo}" data-num="${art.num}" title="語音朗讀此條文">
-                🔊 朗讀
+                <span class="tool-icon">🔊</span><span class="tool-label">朗讀</span>
               </button>
               <button class="btn-tool btn-copy-citation" data-law="${law.name}" data-art-no="${art.rawNo}" data-num="${art.num}" title="一鍵複製報告書引用格式">
-                📋 複製引用
+                <span class="tool-icon">📋</span><span class="tool-label">引用</span>
               </button>
-              <button class="btn-tool btn-bookmark ${isBookmarked ? 'active' : ''}" data-law-id="${law.id}" data-law-name="${law.name}" data-num="${art.num}" data-raw-no="${art.rawNo}">
-                ${isBookmarked ? '★ 已收藏' : '☆ 收藏'}
+              <button class="btn-tool btn-bookmark ${isBookmarked ? 'active' : ''}" data-law-id="${law.id}" data-law-name="${law.name}" data-num="${art.num}" data-raw-no="${art.rawNo}" title="加入或取消收藏">
+                <span class="tool-icon">${isBookmarked ? '★' : '☆'}</span><span class="tool-label">${isBookmarked ? '已收藏' : '收藏'}</span>
               </button>
             </div>
           </div>
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (existingIdx >= 0) {
           state.bookmarks.splice(existingIdx, 1);
           btn.classList.remove('active');
-          btn.innerHTML = '☆ 收藏';
+          btn.innerHTML = '<span class="tool-icon">☆</span><span class="tool-label">收藏</span>';
           showToast('已自收藏夾移除');
         } else {
           state.bookmarks.push({
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             savedAt: new Date().toISOString()
           });
           btn.classList.add('active');
-          btn.innerHTML = '★ 已收藏';
+          btn.innerHTML = '<span class="tool-icon">★</span><span class="tool-label">已收藏</span>';
           showToast('已加入收藏夾');
         }
         localStorage.setItem('val_bookmarks', JSON.stringify(state.bookmarks));
@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.article-card.reading').forEach(c => c.classList.remove('reading'));
     document.querySelectorAll('.btn-tool.btn-tts.active').forEach(b => {
       b.classList.remove('active');
-      b.innerHTML = '🔊 朗讀';
+      b.innerHTML = '<span class="tool-icon">🔊</span><span class="tool-label">朗讀</span>';
     });
 
     if (status === 'playing' || status === 'paused') {
@@ -544,7 +544,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const btn = card.querySelector('.btn-tts');
         if (btn) {
           btn.classList.add('active');
-          btn.innerHTML = status === 'playing' ? '⏸ 暫停' : '▶ 播放';
+          btn.innerHTML = status === 'playing' 
+            ? '<span class="tool-icon">⏸</span><span class="tool-label">暫停</span>' 
+            : '<span class="tool-icon">▶</span><span class="tool-label">播放</span>';
         }
       }
     } else {
@@ -834,17 +836,99 @@ document.addEventListener('DOMContentLoaded', async () => {
     const law = state.lawsData.find(l => l.id === state.currentLawId);
     if (!law) return;
 
-    let itemsHtml = '';
-    for (let i = 1; i <= law.totalArticles; i++) {
-      itemsHtml += `<span class="jump-chip" style="padding:6px 12px;font-size:0.9rem;" onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('art-${i}')?.scrollIntoView({behavior:'smooth',block:'start'})">第${i}條</span>`;
-    }
-
     el.modalTitle.textContent = `快速跳轉《${law.name}》條號`;
-    el.modalContent.innerHTML = `
-      <div style="display:flex; flex-wrap:wrap; gap:8px; max-height:60vh; overflow-y:auto; padding:8px 0;">
-        ${itemsHtml}
+
+    let html = `
+      <div style="margin-bottom: 14px;">
+        <div style="display: flex; gap: 8px;">
+          <input type="number" id="quickJumpNumInput" placeholder="輸入條號（如 757）..." 
+                 min="1" max="${law.totalArticles}" 
+                 style="flex: 1; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-main); color: var(--text-main); font-size: 1rem; outline: none;">
+          <button id="btnConfirmQuickJump" class="btn-tool" 
+                  style="padding: 10px 18px; background: var(--primary); color: #fff; border: none; font-weight: 600; border-radius: 8px; cursor: pointer;">
+            立即直達
+          </button>
+        </div>
       </div>
     `;
+
+    // If chapters exist, show chapters list
+    if (law.chapters && law.chapters.length > 1) {
+      html += `
+        <div style="margin-bottom: 14px;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">📑 編章目錄快速導航：</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 22vh; overflow-y: auto;">
+            ${law.chapters.map(c => `
+              <span class="jump-chip" style="padding: 5px 10px; font-size: 0.82rem;" 
+                    onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('art-${c.firstArticle}')?.scrollIntoView({behavior:'smooth',block:'start'})">
+                ${c.chapterTitle}
+              </span>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // If moderate size (<= 150 articles), show individual chips
+    if (law.totalArticles <= 150) {
+      let itemsHtml = '';
+      for (let i = 1; i <= law.totalArticles; i++) {
+        itemsHtml += `<span class="jump-chip" style="padding: 5px 10px; font-size: 0.82rem;" onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('art-${i}')?.scrollIntoView({behavior:'smooth',block:'start'})">第${i}條</span>`;
+      }
+      html += `
+        <div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">🔢 全條號清單：</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 26vh; overflow-y: auto;">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+    } else {
+      // Range blocks for massive laws like Civil Law (1~50, 51~100...)
+      const rangeChips = [];
+      for (let i = 1; i <= law.totalArticles; i += 50) {
+        const end = Math.min(i + 49, law.totalArticles);
+        rangeChips.push(`
+          <span class="jump-chip" style="padding: 5px 10px; font-size: 0.82rem;" 
+                onclick="document.getElementById('modalOverlay').classList.remove('open'); document.getElementById('art-${i}')?.scrollIntoView({behavior:'smooth',block:'start'})">
+            第${i} ~ ${end}條
+          </span>
+        `);
+      }
+      html += `
+        <div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">🔢 條號分段直達：</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 26vh; overflow-y: auto;">
+            ${rangeChips.join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    el.modalContent.innerHTML = html;
     el.modalOverlay.classList.add('open');
+
+    const input = document.getElementById('quickJumpNumInput');
+    const btnJump = document.getElementById('btnConfirmQuickJump');
+
+    const doJump = () => {
+      const val = input.value.trim();
+      if (!val) return;
+      el.modalOverlay.classList.remove('open');
+      const target = document.getElementById(`art-${val}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('highlighted');
+        setTimeout(() => target.classList.remove('highlighted'), 2000);
+      } else {
+        showToast(`未找到第 ${val} 條`);
+      }
+    };
+
+    btnJump?.addEventListener('click', doJump);
+    input?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') doJump();
+    });
+    setTimeout(() => input?.focus(), 150);
   }
 });

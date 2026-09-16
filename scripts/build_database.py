@@ -19,71 +19,9 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 LAW_ZIP_URL = "https://law.moj.gov.tw/api/ch/law/json"
 ORDER_ZIP_URL = "https://law.moj.gov.tw/api/ch/order/json"
 
-# 目標法規定義表（包含分類、層級、縮寫、考試大綱註記等）
+# 目標法規定義表（依重要性與母法-子法層級重新排序：民法居首，母法後緊接子法/施行細則）
 TARGET_LAWS = [
-    # ==== 分類 1: 估價技術與職業法規 ====
-    {
-        "name": "不動產估價技術規則",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法規命令",
-        "abbr": ["技術規則", "估技", "估規"],
-        "inExam": True,
-        "examSubject": "不動產估價理論與實務、民法物權與不動產法規",
-        "priority": 1
-    },
-    {
-        "name": "不動產估價師法",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法律",
-        "abbr": ["估價師法"],
-        "inExam": True,
-        "examSubject": "民法物權與不動產法規",
-        "priority": 2
-    },
-    {
-        "name": "不動產估價師法施行細則",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法規命令",
-        "abbr": ["估價師細則"],
-        "inExam": True,
-        "examSubject": "民法物權與不動產法規",
-        "priority": 3
-    },
-    {
-        "name": "地價調查估計規則",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法規命令",
-        "abbr": ["地價規則", "地調規則"],
-        "inExam": True,
-        "examSubject": "民法物權與不動產法規",
-        "priority": 4
-    },
-    {
-        "name": "土地徵收補償市價查估辦法",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法規命令",
-        "abbr": ["市價查估辦法", "徵收查估辦法"],
-        "inExam": True,
-        "examSubject": "民法物權與不動產法規",
-        "priority": 5
-    },
-    {
-        "name": "地價及標準地價評議委員會組織與運作辦法",
-        "category": "valuation",
-        "categoryName": "估價技術與職業規範",
-        "level": "法規命令",
-        "abbr": ["地評會辦法", "地價評議委員會"],
-        "inExam": False,
-        "examSubject": "地價評議與實務運作",
-        "priority": 6
-    },
-
-    # ==== 分類 2: 民事與產權法規 ====
+    # ==== 體系 1: 民法與土地基本法規（產權基石） ====
     {
         "name": "民法",
         "category": "civil",
@@ -92,7 +30,7 @@ TARGET_LAWS = [
         "abbr": ["民法", "民法物權"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 10
+        "priority": 1
     },
     {
         "name": "民法物權編施行法",
@@ -102,7 +40,7 @@ TARGET_LAWS = [
         "abbr": ["物權法施行法"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 11
+        "priority": 2
     },
     {
         "name": "土地法",
@@ -112,7 +50,7 @@ TARGET_LAWS = [
         "abbr": ["土地法"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 12
+        "priority": 3
     },
     {
         "name": "土地法施行法",
@@ -122,7 +60,7 @@ TARGET_LAWS = [
         "abbr": ["土地法施行法"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 13
+        "priority": 4
     },
     {
         "name": "土地登記規則",
@@ -132,7 +70,7 @@ TARGET_LAWS = [
         "abbr": ["土登規則", "土地登記"],
         "inExam": False,
         "examSubject": "產權與估價實務",
-        "priority": 14
+        "priority": 5
     },
     {
         "name": "地籍測量實施規則",
@@ -142,324 +80,72 @@ TARGET_LAWS = [
         "abbr": ["地籍測量", "測量規則"],
         "inExam": False,
         "examSubject": "建物測量與產權估價實務",
-        "priority": 15
-    },
-    {
-        "name": "公寓大廈管理條例",
-        "category": "civil",
-        "categoryName": "民事產權與登記法規",
-        "level": "法律",
-        "abbr": ["公寓大廈條例", "公寓大廈"],
-        "inExam": False,
-        "examSubject": "房地區分所有與共有持分估價",
-        "priority": 16
-    },
-    {
-        "name": "公寓大廈管理條例施行細則",
-        "category": "civil",
-        "categoryName": "民事產權與登記法規",
-        "level": "法規命令",
-        "abbr": ["公寓細則"],
-        "inExam": False,
-        "examSubject": "實務延伸",
-        "priority": 17
-    },
-    {
-        "name": "不動產經紀業管理條例",
-        "category": "civil",
-        "categoryName": "民事產權與登記法規",
-        "level": "法律",
-        "abbr": ["經紀業條例"],
-        "inExam": False,
-        "examSubject": "實價登錄與交易實務",
-        "priority": 18
-    },
-    {
-        "name": "不動產經紀業管理條例施行細則",
-        "category": "civil",
-        "categoryName": "民事產權與登記法規",
-        "level": "法規命令",
-        "abbr": ["經紀業細則"],
-        "inExam": False,
-        "examSubject": "實價登錄實務",
-        "priority": 19
-    },
-    {
-        "name": "信託法",
-        "category": "civil",
-        "categoryName": "民事產權與登記法規",
-        "level": "法律",
-        "abbr": ["信託法"],
-        "inExam": False,
-        "examSubject": "不動產投資與信託估價",
-        "priority": 20
+        "priority": 6
     },
 
-    # ==== 分類 3: 土地規劃與利用法規 ====
+    # ==== 體系 2: 不動產估價專業法制體系 ====
     {
-        "name": "國土計畫法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
+        "name": "不動產估價師法",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
         "level": "法律",
-        "abbr": ["國土法"],
+        "abbr": ["估價師法"],
         "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 21
+        "examSubject": "民法物權與不動產法規",
+        "priority": 7
     },
     {
-        "name": "國土計畫法施行細德".replace("德", "則"),
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
+        "name": "不動產估價師法施行細則",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
         "level": "法規命令",
-        "abbr": ["國土細則"],
+        "abbr": ["估價師細則"],
         "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 22
+        "examSubject": "民法物權與不動產法規",
+        "priority": 8
     },
     {
-        "name": "區域計畫法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["區域計畫法"],
+        "name": "不動產估價技術規則",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
+        "level": "法規命令",
+        "abbr": ["技術規則", "估技", "估規"],
         "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 23
+        "examSubject": "不動產估價理論與實務、民法物權與不動產法規",
+        "priority": 9
     },
     {
-        "name": "區域計畫法施行細則",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
+        "name": "地價調查估計規則",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
         "level": "法規命令",
-        "abbr": ["區域細則"],
+        "abbr": ["地價規則", "地調規則"],
         "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 24
+        "examSubject": "民法物權與不動產法規",
+        "priority": 10
     },
     {
-        "name": "非都市土地使用管制規則",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
+        "name": "土地徵收補償市價查估辦法",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
         "level": "法規命令",
-        "abbr": ["非都管制規則", "非都規則"],
+        "abbr": ["市價查估辦法", "徵收查估辦法"],
         "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 25
+        "examSubject": "民法物權與不動產法規",
+        "priority": 11
     },
     {
-        "name": "都市計畫法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["都計法"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 26
-    },
-    {
-        "name": "都市計畫法臺灣省施行細則",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
+        "name": "地價及標準地價評議委員會組織與運作辦法",
+        "category": "valuation",
+        "categoryName": "估價技術與職業規範",
         "level": "法規命令",
-        "abbr": ["都計細則", "都市計畫細則"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 27
-    },
-    {
-        "name": "建築法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["建築法"],
+        "abbr": ["地評會辦法", "地價評議委員會"],
         "inExam": False,
-        "examSubject": "土地開發分析與建築法規",
-        "priority": 28
-    },
-    {
-        "name": "建築技術規則總則編",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法規命令",
-        "abbr": ["建技總則"],
-        "inExam": False,
-        "examSubject": "容積、建蔽率與建築規劃",
-        "priority": 29
-    },
-    {
-        "name": "建築技術規則建築設計施工編",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法規命令",
-        "abbr": ["設計施工編", "建技施工編"],
-        "inExam": False,
-        "examSubject": "建築設計與容積計算估價",
-        "priority": 30
-    },
-    {
-        "name": "農業發展條例",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["農發條例"],
-        "inExam": False,
-        "examSubject": "農地與農舍估價",
-        "priority": 31
-    },
-    {
-        "name": "農業發展條例施行細則",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法規命令",
-        "abbr": ["農發細則"],
-        "inExam": False,
-        "examSubject": "農地估價實務",
-        "priority": 32
-    },
-    {
-        "name": "文化資產保存法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["文資法"],
-        "inExam": False,
-        "examSubject": "古蹟容積移轉與文化資產估價",
-        "priority": 33
-    },
-    {
-        "name": "水土保持法",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["水保法"],
-        "inExam": False,
-        "examSubject": "山坡地開發估價",
-        "priority": 34
-    },
-    {
-        "name": "山坡地保育利用條例",
-        "category": "landuse",
-        "categoryName": "土地規劃與使用管制",
-        "level": "法律",
-        "abbr": ["山坡地條例"],
-        "inExam": False,
-        "examSubject": "山坡地估價實務",
-        "priority": 35
+        "examSubject": "地價評議與實務運作",
+        "priority": 12
     },
 
-    # ==== 分類 4: 都市更新、重劃與徵收法規 ====
-    {
-        "name": "都市更新條例",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法律",
-        "abbr": ["都更條例"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 40
-    },
-    {
-        "name": "都市更新條例施行細則",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["都更細則"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 41
-    },
-    {
-        "name": "都市更新權利變換實施辦法",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["都更權利變換辦法", "權變辦法"],
-        "inExam": False,
-        "examSubject": "都市更新權利變換估價核心",
-        "priority": 42
-    },
-    {
-        "name": "都市危險及老舊建築物加速重建條例",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法律",
-        "abbr": ["危老條例"],
-        "inExam": False,
-        "examSubject": "危老重建估價",
-        "priority": 43
-    },
-    {
-        "name": "都市危險及老舊建築物加速重建條例施行細則",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["危老細則"],
-        "inExam": False,
-        "examSubject": "危老重建估價",
-        "priority": 44
-    },
-    {
-        "name": "土地徵收條例",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法律",
-        "abbr": ["土徵條例"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 45
-    },
-    {
-        "name": "土地徵收條例施行細則",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["土徵細則"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 46
-    },
-    {
-        "name": "都市計畫容積移轉實施辦法",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["容移辦法", "容積移轉辦法"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 47
-    },
-    {
-        "name": "區段徵收實施辦法",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["區段徵收辦法"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 48
-    },
-    {
-        "name": "市地重劃實施辦法",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["市地重劃辦法"],
-        "inExam": True,
-        "examSubject": "土地利用法規",
-        "priority": 49
-    },
-    {
-        "name": "獎勵土地所有權人辦理市地重劃辦法",
-        "category": "redevelopment",
-        "categoryName": "都更重劃與土地徵收",
-        "level": "法規命令",
-        "abbr": ["自辦市地重劃辦法", "自辦重劃"],
-        "inExam": False,
-        "examSubject": "市地重劃與抵費地估價",
-        "priority": 50
-    },
-
-    # ==== 分類 5: 土地稅制與公有財產法規 ====
+    # ==== 體系 3: 平均地權、土地稅制與公有財產 ====
     {
         "name": "平均地權條例",
         "category": "tax",
@@ -468,7 +154,7 @@ TARGET_LAWS = [
         "abbr": ["平權條例", "平均地權"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 60
+        "priority": 13
     },
     {
         "name": "平均地權條例施行細則",
@@ -478,7 +164,7 @@ TARGET_LAWS = [
         "abbr": ["平權細則"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 61
+        "priority": 14
     },
     {
         "name": "土地稅法",
@@ -488,7 +174,7 @@ TARGET_LAWS = [
         "abbr": ["土地稅法"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 62
+        "priority": 15
     },
     {
         "name": "土地稅法施行細則",
@@ -498,7 +184,7 @@ TARGET_LAWS = [
         "abbr": ["土地稅細則"],
         "inExam": True,
         "examSubject": "民法物權與不動產法規",
-        "priority": 63
+        "priority": 16
     },
     {
         "name": "房屋稅條例",
@@ -508,7 +194,7 @@ TARGET_LAWS = [
         "abbr": ["房屋稅條例"],
         "inExam": False,
         "examSubject": "房屋稅與差別稅率評定",
-        "priority": 64
+        "priority": 17
     },
     {
         "name": "契稅條例",
@@ -518,7 +204,7 @@ TARGET_LAWS = [
         "abbr": ["契稅條例"],
         "inExam": False,
         "examSubject": "不動產交易稅負分析",
-        "priority": 65
+        "priority": 18
     },
     {
         "name": "國有財產法",
@@ -528,7 +214,7 @@ TARGET_LAWS = [
         "abbr": ["國產法"],
         "inExam": False,
         "examSubject": "公有土地標售與地上權估價",
-        "priority": 66
+        "priority": 19
     },
     {
         "name": "國有財產法施行細則",
@@ -538,7 +224,284 @@ TARGET_LAWS = [
         "abbr": ["國產細則"],
         "inExam": False,
         "examSubject": "公有財產估價作業",
-        "priority": 67
+        "priority": 20
+    },
+    # 附：國有財產計價方式 (priority: 21) 定義於下文
+
+    # ==== 體系 4: 都市更新、危老、重劃與土地徵收 ====
+    {
+        "name": "都市更新條例",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法律",
+        "abbr": ["都更條例"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 22
+    },
+    {
+        "name": "都市更新條例施行細則",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["都更細則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 23
+    },
+    {
+        "name": "都市更新權利變換實施辦法",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["都更權利變換辦法", "權變辦法"],
+        "inExam": False,
+        "examSubject": "都市更新權利變換估價核心",
+        "priority": 24
+    },
+    {
+        "name": "都市危險及老舊建築物加速重建條例",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法律",
+        "abbr": ["危老條例"],
+        "inExam": False,
+        "examSubject": "危老重建估價",
+        "priority": 25
+    },
+    {
+        "name": "都市危險及老舊建築物加速重建條例施行細則",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["危老細則"],
+        "inExam": False,
+        "examSubject": "危老重建估價",
+        "priority": 26
+    },
+    {
+        "name": "土地徵收條例",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法律",
+        "abbr": ["土徵條例"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 27
+    },
+    {
+        "name": "土地徵收條例施行細則",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["土徵細則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 28
+    },
+    {
+        "name": "區段徵收實施辦法",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["區段徵收辦法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 29
+    },
+    {
+        "name": "市地重劃實施辦法",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["市地重劃辦法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 30
+    },
+    {
+        "name": "獎勵土地所有權人辦理市地重劃辦法",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["自辦市地重劃辦法", "自辦重劃"],
+        "inExam": False,
+        "examSubject": "市地重劃與抵費地估價",
+        "priority": 31
+    },
+    {
+        "name": "都市計畫容積移轉實施辦法",
+        "category": "redevelopment",
+        "categoryName": "都更重劃與土地徵收",
+        "level": "法規命令",
+        "abbr": ["容移辦法", "容積移轉辦法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 32
+    },
+
+    # ==== 體系 5: 國土規劃、都市計畫與建築管制 ====
+    {
+        "name": "國土計畫法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["國土法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 33
+    },
+    {
+        "name": "國土計畫法施行細則",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["國土細則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 34
+    },
+    {
+        "name": "區域計畫法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["區域計畫法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 35
+    },
+    {
+        "name": "區域計畫法施行細則",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["區域細則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 36
+    },
+    {
+        "name": "非都市土地使用管制規則",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["非都管制規則", "非都規則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 37
+    },
+    {
+        "name": "都市計畫法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["都計法"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 38
+    },
+    {
+        "name": "都市計畫法臺灣省施行細則",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["都計細則", "都市計畫細則"],
+        "inExam": True,
+        "examSubject": "土地利用法規",
+        "priority": 39
+    },
+    {
+        "name": "建築法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["建築法"],
+        "inExam": False,
+        "examSubject": "土地開發分析與建築法規",
+        "priority": 40
+    },
+    {
+        "name": "建築技術規則總則編",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["建技總則"],
+        "inExam": False,
+        "examSubject": "容積、建蔽率與建築規劃",
+        "priority": 41
+    },
+    {
+        "name": "建築技術規則建築設計施工編",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["設計施工編", "建技施工編"],
+        "inExam": False,
+        "examSubject": "建築設計與容積計算估價",
+        "priority": 42
+    },
+
+    # ==== 體系 6: 交易管理、特殊土地與不動產金融 ====
+    {
+        "name": "公寓大廈管理條例",
+        "category": "civil",
+        "categoryName": "民事產權與登記法規",
+        "level": "法律",
+        "abbr": ["公寓大廈條例", "公寓大廈"],
+        "inExam": False,
+        "examSubject": "房地區分所有與共有持分估價",
+        "priority": 43
+    },
+    {
+        "name": "公寓大廈管理條例施行細則",
+        "category": "civil",
+        "categoryName": "民事產權與登記法規",
+        "level": "法規命令",
+        "abbr": ["公寓細則"],
+        "inExam": False,
+        "examSubject": "實務延伸",
+        "priority": 44
+    },
+    {
+        "name": "不動產經紀業管理條例",
+        "category": "civil",
+        "categoryName": "民事產權與登記法規",
+        "level": "法律",
+        "abbr": ["經紀業條例"],
+        "inExam": False,
+        "examSubject": "實價登錄與交易實務",
+        "priority": 45
+    },
+    {
+        "name": "不動產經紀業管理條例施行細則",
+        "category": "civil",
+        "categoryName": "民事產權與登記法規",
+        "level": "法規命令",
+        "abbr": ["經紀業細則"],
+        "inExam": False,
+        "examSubject": "實價登錄實務",
+        "priority": 46
+    },
+    {
+        "name": "農業發展條例",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["農發條例"],
+        "inExam": False,
+        "examSubject": "農地與農舍估價",
+        "priority": 47
+    },
+    {
+        "name": "農業發展條例施行細則",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法規命令",
+        "abbr": ["農發細則"],
+        "inExam": False,
+        "examSubject": "農地估價實務",
+        "priority": 48
     },
     {
         "name": "不動產證券化條例",
@@ -548,7 +511,7 @@ TARGET_LAWS = [
         "abbr": ["證券化條例"],
         "inExam": False,
         "examSubject": "不動產投資信託 REITs 估價",
-        "priority": 68
+        "priority": 49
     },
     {
         "name": "不動產證券化條例施行細則",
@@ -558,7 +521,47 @@ TARGET_LAWS = [
         "abbr": ["證券化細則"],
         "inExam": False,
         "examSubject": "不動產證券化估價",
-        "priority": 69
+        "priority": 50
+    },
+    {
+        "name": "信託法",
+        "category": "civil",
+        "categoryName": "民事產權與登記法規",
+        "level": "法律",
+        "abbr": ["信託法"],
+        "inExam": False,
+        "examSubject": "不動產投資與信託估價",
+        "priority": 51
+    },
+    {
+        "name": "文化資產保存法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["文資法"],
+        "inExam": False,
+        "examSubject": "古蹟容積移轉與文化資產估價",
+        "priority": 52
+    },
+    {
+        "name": "水土保持法",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["水保法"],
+        "inExam": False,
+        "examSubject": "山坡地開發估價",
+        "priority": 53
+    },
+    {
+        "name": "山坡地保育利用條例",
+        "category": "landuse",
+        "categoryName": "土地規劃與建築管制",
+        "level": "法律",
+        "abbr": ["山坡地條例"],
+        "inExam": False,
+        "examSubject": "山坡地估價實務",
+        "priority": 54
     }
 ]
 
@@ -657,7 +660,7 @@ NATIONAL_PROPERTY_PRICING_RULE = {
     "abbr": ["國產計價方式", "國有財產計價"],
     "inExam": False,
     "examSubject": "公有土地讓售、標售底價與地上權估價實務",
-    "priority": 68,
+    "priority": 21,
     "lawURL": "https://www.fnp.gov.tw",
     "modifiedDate": "111.08.19",
     "effectiveDate": "111.08.19",

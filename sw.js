@@ -1,5 +1,5 @@
 // 估價小六法 PWA Service Worker
-const CACHE_NAME = 'val-law-v1.0.0';
+const CACHE_NAME = 'val-law-v1.1.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './css/app.css',
   './js/app.js',
   './js/search.js',
+  './js/tts.js',
   './icons/icon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png',

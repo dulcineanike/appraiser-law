@@ -1,188 +1,5 @@
 [
   {
-    "id": "不動產估價技術規則",
-    "name": "不動產估價技術規則",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法規命令",
-    "abbr": [
-      "技術規則",
-      "估技",
-      "估規"
-    ],
-    "inExam": true,
-    "examSubject": "不動產估價理論與實務、民法物權與不動產法規",
-    "priority": 1,
-    "modifiedDate": "20131220",
-    "totalArticles": 140,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 估價作業程序",
-        "firstArticle": "8"
-      },
-      {
-        "chapterTitle": "第 三 章 估價方法",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 比較法",
-        "firstArticle": "18"
-      },
-      {
-        "chapterTitle": "第 二 節 收益法",
-        "firstArticle": "28"
-      },
-      {
-        "chapterTitle": "第 三 節 成本法",
-        "firstArticle": "48"
-      },
-      {
-        "chapterTitle": "第 四 章 宗地估價",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 通則",
-        "firstArticle": "83"
-      },
-      {
-        "chapterTitle": "第 二 節 特殊宗地估價",
-        "firstArticle": "90"
-      },
-      {
-        "chapterTitle": "第 五 章 房地估價",
-        "firstArticle": "98"
-      },
-      {
-        "chapterTitle": "第 六 章 土地改良物估價",
-        "firstArticle": "107"
-      },
-      {
-        "chapterTitle": "第 七 章 權利估價",
-        "firstArticle": "114"
-      },
-      {
-        "chapterTitle": "第 八 章 租金估計",
-        "firstArticle": "129"
-      },
-      {
-        "chapterTitle": "第 九 章 附則",
-        "firstArticle": "134"
-      }
-    ]
-  },
-  {
-    "id": "不動產估價師法",
-    "name": "不動產估價師法",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法律",
-    "abbr": [
-      "估價師法"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 2,
-    "modifiedDate": "20240807",
-    "totalArticles": 49,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章  總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章  登記及開業",
-        "firstArticle": "5"
-      },
-      {
-        "chapterTitle": "第 三 章  業務及責任",
-        "firstArticle": "14"
-      },
-      {
-        "chapterTitle": "第 四 章  公會",
-        "firstArticle": "22"
-      },
-      {
-        "chapterTitle": "第 五 章  獎懲",
-        "firstArticle": "30"
-      },
-      {
-        "chapterTitle": "第 六 章  附則",
-        "firstArticle": "41"
-      }
-    ]
-  },
-  {
-    "id": "不動產估價師法施行細則",
-    "name": "不動產估價師法施行細則",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法規命令",
-    "abbr": [
-      "估價師細則"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 3,
-    "modifiedDate": "20260629",
-    "totalArticles": 24,
-    "chapters": []
-  },
-  {
-    "id": "地價調查估計規則",
-    "name": "地價調查估計規則",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法規命令",
-    "abbr": [
-      "地價規則",
-      "地調規則"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 4,
-    "modifiedDate": "20131231",
-    "totalArticles": 27,
-    "chapters": []
-  },
-  {
-    "id": "土地徵收補償市價查估辦法",
-    "name": "土地徵收補償市價查估辦法",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法規命令",
-    "abbr": [
-      "市價查估辦法",
-      "徵收查估辦法"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 5,
-    "modifiedDate": "20141114",
-    "totalArticles": 33,
-    "chapters": []
-  },
-  {
-    "id": "地價及標準地價評議委員會組織與運作辦法",
-    "name": "地價及標準地價評議委員會組織與運作辦法",
-    "category": "valuation",
-    "categoryName": "估價技術與職業規範",
-    "level": "法規命令",
-    "abbr": [
-      "地評會辦法",
-      "地價評議委員會"
-    ],
-    "inExam": false,
-    "examSubject": "地價評議與實務運作",
-    "priority": 6,
-    "modifiedDate": "20230510",
-    "totalArticles": 15,
-    "chapters": []
-  },
-  {
     "id": "民法",
     "name": "民法",
     "category": "civil",
@@ -194,7 +11,7 @@
     ],
     "inExam": true,
     "examSubject": "民法物權與不動產法規",
-    "priority": 10,
+    "priority": 1,
     "modifiedDate": "20260817",
     "totalArticles": 1439,
     "chapters": [
@@ -767,7 +584,7 @@
     ],
     "inExam": true,
     "examSubject": "民法物權與不動產法規",
-    "priority": 11,
+    "priority": 2,
     "modifiedDate": "20100203",
     "totalArticles": 31,
     "chapters": []
@@ -783,7 +600,7 @@
     ],
     "inExam": true,
     "examSubject": "民法物權與不動產法規",
-    "priority": 12,
+    "priority": 3,
     "modifiedDate": "20240807",
     "totalArticles": 262,
     "chapters": [
@@ -920,7 +737,7 @@
     ],
     "inExam": true,
     "examSubject": "民法物權與不動產法規",
-    "priority": 13,
+    "priority": 4,
     "modifiedDate": "20110615",
     "totalArticles": 63,
     "chapters": [
@@ -958,7 +775,7 @@
     ],
     "inExam": false,
     "examSubject": "產權與估價實務",
-    "priority": 14,
+    "priority": 5,
     "modifiedDate": "20210713",
     "totalArticles": 184,
     "chapters": [
@@ -1072,7 +889,7 @@
     ],
     "inExam": false,
     "examSubject": "建物測量與產權估價實務",
-    "priority": 15,
+    "priority": 6,
     "modifiedDate": "20230113",
     "totalArticles": 324,
     "chapters": [
@@ -1243,185 +1060,977 @@
     ]
   },
   {
-    "id": "公寓大廈管理條例",
-    "name": "公寓大廈管理條例",
-    "category": "civil",
-    "categoryName": "民事產權與登記法規",
+    "id": "不動產估價師法",
+    "name": "不動產估價師法",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
     "level": "法律",
     "abbr": [
-      "公寓大廈條例",
-      "公寓大廈"
+      "估價師法"
     ],
-    "inExam": false,
-    "examSubject": "房地區分所有與共有持分估價",
-    "priority": 16,
-    "modifiedDate": "20220511",
-    "totalArticles": 66,
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 7,
+    "modifiedDate": "20240807",
+    "totalArticles": 49,
     "chapters": [
       {
-        "chapterTitle": "第 一 章 總則",
+        "chapterTitle": "第 一 章  總則",
         "firstArticle": "1"
       },
       {
-        "chapterTitle": "第 二 章 住戶之權利義務",
-        "firstArticle": "4"
-      },
-      {
-        "chapterTitle": "第 三 章 管理組織",
-        "firstArticle": "25"
-      },
-      {
-        "chapterTitle": "第 四 章 管理服務人",
-        "firstArticle": "41"
-      },
-      {
-        "chapterTitle": "第 五 章 罰則",
-        "firstArticle": "47"
-      },
-      {
-        "chapterTitle": "第 六 章 附則",
-        "firstArticle": "53"
-      }
-    ]
-  },
-  {
-    "id": "公寓大廈管理條例施行細則",
-    "name": "公寓大廈管理條例施行細則",
-    "category": "civil",
-    "categoryName": "民事產權與登記法規",
-    "level": "法規命令",
-    "abbr": [
-      "公寓細則"
-    ],
-    "inExam": false,
-    "examSubject": "實務延伸",
-    "priority": 17,
-    "modifiedDate": "20051116",
-    "totalArticles": 14,
-    "chapters": []
-  },
-  {
-    "id": "不動產經紀業管理條例",
-    "name": "不動產經紀業管理條例",
-    "category": "civil",
-    "categoryName": "民事產權與登記法規",
-    "level": "法律",
-    "abbr": [
-      "經紀業條例"
-    ],
-    "inExam": false,
-    "examSubject": "實價登錄與交易實務",
-    "priority": 18,
-    "modifiedDate": "20210127",
-    "totalArticles": 43,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 經紀業",
+        "chapterTitle": "第 二 章  登記及開業",
         "firstArticle": "5"
       },
       {
-        "chapterTitle": "第 三 章 經紀人員",
-        "firstArticle": "13"
+        "chapterTitle": "第 三 章  業務及責任",
+        "firstArticle": "14"
       },
       {
-        "chapterTitle": "第 四 章 業務及責任",
-        "firstArticle": "18"
+        "chapterTitle": "第 四 章  公會",
+        "firstArticle": "22"
       },
       {
-        "chapterTitle": "第 五 章 獎懲",
-        "firstArticle": "28"
+        "chapterTitle": "第 五 章  獎懲",
+        "firstArticle": "30"
       },
       {
-        "chapterTitle": "第 六 章 附則",
-        "firstArticle": "36"
+        "chapterTitle": "第 六 章  附則",
+        "firstArticle": "41"
       }
     ]
   },
   {
-    "id": "不動產經紀業管理條例施行細則",
-    "name": "不動產經紀業管理條例施行細則",
-    "category": "civil",
-    "categoryName": "民事產權與登記法規",
+    "id": "不動產估價師法施行細則",
+    "name": "不動產估價師法施行細則",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
     "level": "法規命令",
     "abbr": [
-      "經紀業細則"
+      "估價師細則"
     ],
-    "inExam": false,
-    "examSubject": "實價登錄實務",
-    "priority": 19,
-    "modifiedDate": "20020322",
-    "totalArticles": 36,
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 8,
+    "modifiedDate": "20260629",
+    "totalArticles": 24,
     "chapters": []
   },
   {
-    "id": "信託法",
-    "name": "信託法",
-    "category": "civil",
-    "categoryName": "民事產權與登記法規",
-    "level": "法律",
+    "id": "不動產估價技術規則",
+    "name": "不動產估價技術規則",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
+    "level": "法規命令",
     "abbr": [
-      "信託法"
+      "技術規則",
+      "估技",
+      "估規"
     ],
-    "inExam": false,
-    "examSubject": "不動產投資與信託估價",
-    "priority": 20,
-    "modifiedDate": "20091230",
-    "totalArticles": 86,
+    "inExam": true,
+    "examSubject": "不動產估價理論與實務、民法物權與不動產法規",
+    "priority": 9,
+    "modifiedDate": "20131220",
+    "totalArticles": 140,
     "chapters": [
       {
         "chapterTitle": "第 一 章 總則",
         "firstArticle": "1"
       },
       {
-        "chapterTitle": "第 二 章 信託財產",
-        "firstArticle": "9"
+        "chapterTitle": "第 二 章 估價作業程序",
+        "firstArticle": "8"
       },
       {
-        "chapterTitle": "第 三 章 受益人",
-        "firstArticle": "17"
+        "chapterTitle": "第 三 章 估價方法",
+        "firstArticle": ""
       },
       {
-        "chapterTitle": "第 四 章 受託人",
-        "firstArticle": "21"
+        "chapterTitle": "第 一 節 比較法",
+        "firstArticle": "18"
       },
       {
-        "chapterTitle": "第 五 章 信託監察人",
-        "firstArticle": "52"
+        "chapterTitle": "第 二 節 收益法",
+        "firstArticle": "28"
       },
       {
-        "chapterTitle": "第 六 章 信託之監督",
-        "firstArticle": "60"
+        "chapterTitle": "第 三 節 成本法",
+        "firstArticle": "48"
       },
       {
-        "chapterTitle": "第 七 章 信託關係之消滅",
-        "firstArticle": "62"
+        "chapterTitle": "第 四 章 宗地估價",
+        "firstArticle": ""
       },
       {
-        "chapterTitle": "第 八 章 公益信託",
-        "firstArticle": "69"
+        "chapterTitle": "第 一 節 通則",
+        "firstArticle": "83"
+      },
+      {
+        "chapterTitle": "第 二 節 特殊宗地估價",
+        "firstArticle": "90"
+      },
+      {
+        "chapterTitle": "第 五 章 房地估價",
+        "firstArticle": "98"
+      },
+      {
+        "chapterTitle": "第 六 章 土地改良物估價",
+        "firstArticle": "107"
+      },
+      {
+        "chapterTitle": "第 七 章 權利估價",
+        "firstArticle": "114"
+      },
+      {
+        "chapterTitle": "第 八 章 租金估計",
+        "firstArticle": "129"
       },
       {
         "chapterTitle": "第 九 章 附則",
-        "firstArticle": "86"
+        "firstArticle": "134"
       }
     ]
+  },
+  {
+    "id": "地價調查估計規則",
+    "name": "地價調查估計規則",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
+    "level": "法規命令",
+    "abbr": [
+      "地價規則",
+      "地調規則"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 10,
+    "modifiedDate": "20131231",
+    "totalArticles": 27,
+    "chapters": []
+  },
+  {
+    "id": "土地徵收補償市價查估辦法",
+    "name": "土地徵收補償市價查估辦法",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
+    "level": "法規命令",
+    "abbr": [
+      "市價查估辦法",
+      "徵收查估辦法"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 11,
+    "modifiedDate": "20141114",
+    "totalArticles": 33,
+    "chapters": []
+  },
+  {
+    "id": "地價及標準地價評議委員會組織與運作辦法",
+    "name": "地價及標準地價評議委員會組織與運作辦法",
+    "category": "valuation",
+    "categoryName": "估價技術與職業規範",
+    "level": "法規命令",
+    "abbr": [
+      "地評會辦法",
+      "地價評議委員會"
+    ],
+    "inExam": false,
+    "examSubject": "地價評議與實務運作",
+    "priority": 12,
+    "modifiedDate": "20230510",
+    "totalArticles": 15,
+    "chapters": []
+  },
+  {
+    "id": "平均地權條例",
+    "name": "平均地權條例",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法律",
+    "abbr": [
+      "平權條例",
+      "平均地權"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 13,
+    "modifiedDate": "20230208",
+    "totalArticles": 113,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 規定地價",
+        "firstArticle": "13"
+      },
+      {
+        "chapterTitle": "第 三 章 照價徵稅",
+        "firstArticle": "17"
+      },
+      {
+        "chapterTitle": "第 四 章 照價收買",
+        "firstArticle": "27"
+      },
+      {
+        "chapterTitle": "第 五 章 漲價歸公",
+        "firstArticle": "35"
+      },
+      {
+        "chapterTitle": "第 六 章 土地使用",
+        "firstArticle": "52"
+      },
+      {
+        "chapterTitle": "第 七 章 罰則",
+        "firstArticle": "80"
+      },
+      {
+        "chapterTitle": "第 八 章 附則",
+        "firstArticle": "84"
+      }
+    ]
+  },
+  {
+    "id": "平均地權條例施行細則",
+    "name": "平均地權條例施行細則",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法規命令",
+    "abbr": [
+      "平權細則"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 14,
+    "modifiedDate": "20220816",
+    "totalArticles": 110,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 規定地價",
+        "firstArticle": "15"
+      },
+      {
+        "chapterTitle": "第 三 章 照價徵稅",
+        "firstArticle": "26"
+      },
+      {
+        "chapterTitle": "第 四 章 照價收買",
+        "firstArticle": "43"
+      },
+      {
+        "chapterTitle": "第 五 章 漲價歸公",
+        "firstArticle": "50"
+      },
+      {
+        "chapterTitle": "第 六 章 土地使用",
+        "firstArticle": "67"
+      },
+      {
+        "chapterTitle": "第 七 章 附則",
+        "firstArticle": "101"
+      }
+    ]
+  },
+  {
+    "id": "土地稅法",
+    "name": "土地稅法",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法律",
+    "abbr": [
+      "土地稅法"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 15,
+    "modifiedDate": "20250124",
+    "totalArticles": 75,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 一般規定",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 節 名詞定義",
+        "firstArticle": "7"
+      },
+      {
+        "chapterTitle": "第 二 章 地價稅",
+        "firstArticle": "14"
+      },
+      {
+        "chapterTitle": "第 三 章 田賦",
+        "firstArticle": "22"
+      },
+      {
+        "chapterTitle": "第 四 章 土地增值稅",
+        "firstArticle": "28"
+      },
+      {
+        "chapterTitle": "第 五 章 稽徵程序",
+        "firstArticle": "40"
+      },
+      {
+        "chapterTitle": "第 六 章 罰則",
+        "firstArticle": "53"
+      },
+      {
+        "chapterTitle": "第 七 章 附則",
+        "firstArticle": "57"
+      }
+    ]
+  },
+  {
+    "id": "土地稅法施行細則",
+    "name": "土地稅法施行細則",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法規命令",
+    "abbr": [
+      "土地稅細則"
+    ],
+    "inExam": true,
+    "examSubject": "民法物權與不動產法規",
+    "priority": 16,
+    "modifiedDate": "20210923",
+    "totalArticles": 65,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 地價稅",
+        "firstArticle": "5"
+      },
+      {
+        "chapterTitle": "第 三 章 田賦",
+        "firstArticle": "21"
+      },
+      {
+        "chapterTitle": "第 四 章 土地增值稅",
+        "firstArticle": "42"
+      },
+      {
+        "chapterTitle": "第 五 章 附則",
+        "firstArticle": "62"
+      }
+    ]
+  },
+  {
+    "id": "房屋稅條例",
+    "name": "房屋稅條例",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法律",
+    "abbr": [
+      "房屋稅條例"
+    ],
+    "inExam": false,
+    "examSubject": "房屋稅與差別稅率評定",
+    "priority": 17,
+    "modifiedDate": "20240103",
+    "totalArticles": 26,
+    "chapters": []
+  },
+  {
+    "id": "契稅條例",
+    "name": "契稅條例",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法律",
+    "abbr": [
+      "契稅條例"
+    ],
+    "inExam": false,
+    "examSubject": "不動產交易稅負分析",
+    "priority": 18,
+    "modifiedDate": "20100505",
+    "totalArticles": 35,
+    "chapters": []
+  },
+  {
+    "id": "國有財產法",
+    "name": "國有財產法",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法律",
+    "abbr": [
+      "國產法"
+    ],
+    "inExam": false,
+    "examSubject": "公有土地標售與地上權估價",
+    "priority": 19,
+    "modifiedDate": "20181121",
+    "totalArticles": 79,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 機構",
+        "firstArticle": "9"
+      },
+      {
+        "chapterTitle": "第 三 章 保管",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 登記",
+        "firstArticle": "17"
+      },
+      {
+        "chapterTitle": "第 二 節 產籍",
+        "firstArticle": "21"
+      },
+      {
+        "chapterTitle": "第 三 節 維護",
+        "firstArticle": "25"
+      },
+      {
+        "chapterTitle": "第 四 章 使用",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 公用財產之用途",
+        "firstArticle": "32"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產之撥用",
+        "firstArticle": "38"
+      },
+      {
+        "chapterTitle": "第 三 節 非公用財產之借用",
+        "firstArticle": "40"
+      },
+      {
+        "chapterTitle": "第 五 章 收益",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 非公用財產之出租",
+        "firstArticle": "42"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產之利用",
+        "firstArticle": "46"
+      },
+      {
+        "chapterTitle": "第 六 章 處分",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 非公用財產類不動產之處分",
+        "firstArticle": "49"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產類動產、有價證券及權利之處分",
+        "firstArticle": "55"
+      },
+      {
+        "chapterTitle": "第 三 節 計價",
+        "firstArticle": "58"
+      },
+      {
+        "chapterTitle": "第 四 節 贈與",
+        "firstArticle": "60"
+      },
+      {
+        "chapterTitle": "第 七 章 檢核",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 財產檢查",
+        "firstArticle": "61"
+      },
+      {
+        "chapterTitle": "第 二 節 財產報告",
+        "firstArticle": "64"
+      },
+      {
+        "chapterTitle": "第 八 章 附則",
+        "firstArticle": "71"
+      }
+    ]
+  },
+  {
+    "id": "國有財產法施行細則",
+    "name": "國有財產法施行細則",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "法規命令",
+    "abbr": [
+      "國產細則"
+    ],
+    "inExam": false,
+    "examSubject": "公有財產估價作業",
+    "priority": 20,
+    "modifiedDate": "20100723",
+    "totalArticles": 85,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 機構",
+        "firstArticle": "8"
+      },
+      {
+        "chapterTitle": "第 三 章 保管",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 登記",
+        "firstArticle": "12"
+      },
+      {
+        "chapterTitle": "第 二 節 產籍",
+        "firstArticle": "17"
+      },
+      {
+        "chapterTitle": "第 三 節 維護",
+        "firstArticle": "22"
+      },
+      {
+        "chapterTitle": "第 四 章 使用",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 公用財產之用途",
+        "firstArticle": "26"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產之撥用",
+        "firstArticle": "30"
+      },
+      {
+        "chapterTitle": "第 三 節 非公用財產之借用",
+        "firstArticle": "39"
+      },
+      {
+        "chapterTitle": "第 五 章 收益",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 非公用財產之出租",
+        "firstArticle": "43-1"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產之利用",
+        "firstArticle": "48"
+      },
+      {
+        "chapterTitle": "第 六 章 處分",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 非公用財產類不動產之處分",
+        "firstArticle": "49"
+      },
+      {
+        "chapterTitle": "第 二 節 非公用財產類動產有價證券及權利之處分",
+        "firstArticle": "58"
+      },
+      {
+        "chapterTitle": "第 三 節 計價",
+        "firstArticle": "61"
+      },
+      {
+        "chapterTitle": "第 四 節 贈與",
+        "firstArticle": "63"
+      },
+      {
+        "chapterTitle": "第 七 章 檢核",
+        "firstArticle": ""
+      },
+      {
+        "chapterTitle": "第 一 節 財產檢查",
+        "firstArticle": "64"
+      },
+      {
+        "chapterTitle": "第 二 節 財產報告",
+        "firstArticle": "67"
+      },
+      {
+        "chapterTitle": "第 八 章 附則",
+        "firstArticle": "68-1"
+      }
+    ]
+  },
+  {
+    "id": "國有財產計價方式",
+    "name": "國有財產計價方式",
+    "category": "tax",
+    "categoryName": "土地稅制與公有財產",
+    "level": "行政規則",
+    "abbr": [
+      "國產計價方式",
+      "國有財產計價"
+    ],
+    "inExam": false,
+    "examSubject": "公有土地讓售、標售底價與地上權估價實務",
+    "priority": 21,
+    "modifiedDate": "111.08.19",
+    "totalArticles": 8,
+    "chapters": [
+      {
+        "chapterTitle": "全文",
+        "firstArticle": "1"
+      }
+    ]
+  },
+  {
+    "id": "都市更新條例",
+    "name": "都市更新條例",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法律",
+    "abbr": [
+      "都更條例"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 22,
+    "modifiedDate": "20241113",
+    "totalArticles": 88,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 更新地區之劃定",
+        "firstArticle": "5"
+      },
+      {
+        "chapterTitle": "第 三 章 政府主導都市更新",
+        "firstArticle": "11"
+      },
+      {
+        "chapterTitle": "第 四 章 都市更新事業之實施",
+        "firstArticle": "22"
+      },
+      {
+        "chapterTitle": "第 五 章 權利變換",
+        "firstArticle": "48"
+      },
+      {
+        "chapterTitle": "第 六 章 獎助",
+        "firstArticle": "65"
+      },
+      {
+        "chapterTitle": "第 七 章 監督及管理",
+        "firstArticle": "74"
+      },
+      {
+        "chapterTitle": "第 八 章 罰則",
+        "firstArticle": "79"
+      },
+      {
+        "chapterTitle": "第 九 章 附則",
+        "firstArticle": "83"
+      }
+    ]
+  },
+  {
+    "id": "都市更新條例施行細則",
+    "name": "都市更新條例施行細則",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "都更細則"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 23,
+    "modifiedDate": "20190515",
+    "totalArticles": 49,
+    "chapters": []
+  },
+  {
+    "id": "都市更新權利變換實施辦法",
+    "name": "都市更新權利變換實施辦法",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "都更權利變換辦法",
+      "權變辦法"
+    ],
+    "inExam": false,
+    "examSubject": "都市更新權利變換估價核心",
+    "priority": 24,
+    "modifiedDate": "20190617",
+    "totalArticles": 33,
+    "chapters": []
+  },
+  {
+    "id": "都市危險及老舊建築物加速重建條例",
+    "name": "都市危險及老舊建築物加速重建條例",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法律",
+    "abbr": [
+      "危老條例"
+    ],
+    "inExam": false,
+    "examSubject": "危老重建估價",
+    "priority": 25,
+    "modifiedDate": "20231206",
+    "totalArticles": 15,
+    "chapters": []
+  },
+  {
+    "id": "都市危險及老舊建築物加速重建條例施行細則",
+    "name": "都市危險及老舊建築物加速重建條例施行細則",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "危老細則"
+    ],
+    "inExam": false,
+    "examSubject": "危老重建估價",
+    "priority": 26,
+    "modifiedDate": "20170801",
+    "totalArticles": 12,
+    "chapters": []
+  },
+  {
+    "id": "土地徵收條例",
+    "name": "土地徵收條例",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法律",
+    "abbr": [
+      "土徵條例"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 27,
+    "modifiedDate": "20120104",
+    "totalArticles": 71,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 徵收程序",
+        "firstArticle": "10"
+      },
+      {
+        "chapterTitle": "第 三 章 徵收補償",
+        "firstArticle": "30"
+      },
+      {
+        "chapterTitle": "第 四 章 區段徵收",
+        "firstArticle": "37"
+      },
+      {
+        "chapterTitle": "第 五 章 徵收之撤銷及廢止",
+        "firstArticle": "49"
+      },
+      {
+        "chapterTitle": "第 六 章 附則",
+        "firstArticle": "56"
+      }
+    ]
+  },
+  {
+    "id": "土地徵收條例施行細則",
+    "name": "土地徵收條例施行細則",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "土徵細則"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 28,
+    "modifiedDate": "20191216",
+    "totalArticles": 78,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 徵收程序",
+        "firstArticle": "10"
+      },
+      {
+        "chapterTitle": "第 三 章 徵收補償",
+        "firstArticle": "29"
+      },
+      {
+        "chapterTitle": "第 四 章 區段徵收",
+        "firstArticle": "34"
+      },
+      {
+        "chapterTitle": "第 五 章 徵收之撤銷及廢止",
+        "firstArticle": "56-1"
+      },
+      {
+        "chapterTitle": "第 六 章 附則",
+        "firstArticle": "62"
+      }
+    ]
+  },
+  {
+    "id": "區段徵收實施辦法",
+    "name": "區段徵收實施辦法",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "區段徵收辦法"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 29,
+    "modifiedDate": "20121018",
+    "totalArticles": 51,
+    "chapters": []
+  },
+  {
+    "id": "市地重劃實施辦法",
+    "name": "市地重劃實施辦法",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "市地重劃辦法"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 30,
+    "modifiedDate": "20220901",
+    "totalArticles": 63,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 重劃地區之選定與公告禁止事項",
+        "firstArticle": "6"
+      },
+      {
+        "chapterTitle": "第 三 章 重劃計劃之擬訂、核定及公告通知",
+        "firstArticle": "14"
+      },
+      {
+        "chapterTitle": "第 四 章 測量、調查及地價查估",
+        "firstArticle": "19"
+      },
+      {
+        "chapterTitle": "第 五 章 計算負擔及分配設計",
+        "firstArticle": "21"
+      },
+      {
+        "chapterTitle": "第 六 章 土地改良物或墳墓拆遷補償及工程施工",
+        "firstArticle": "38"
+      },
+      {
+        "chapterTitle": "第 七 章 地籍登記",
+        "firstArticle": "42"
+      },
+      {
+        "chapterTitle": "第 八 章 交接及清償",
+        "firstArticle": "51"
+      },
+      {
+        "chapterTitle": "第 九 章 財務結算",
+        "firstArticle": "54"
+      },
+      {
+        "chapterTitle": "第 十 章 附則",
+        "firstArticle": "58"
+      }
+    ]
+  },
+  {
+    "id": "獎勵土地所有權人辦理市地重劃辦法",
+    "name": "獎勵土地所有權人辦理市地重劃辦法",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "自辦市地重劃辦法",
+      "自辦重劃"
+    ],
+    "inExam": false,
+    "examSubject": "市地重劃與抵費地估價",
+    "priority": 31,
+    "modifiedDate": "20190409",
+    "totalArticles": 63,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 重劃會之組織及職權",
+        "firstArticle": "8"
+      },
+      {
+        "chapterTitle": "第 三 章 重劃業務",
+        "firstArticle": "20"
+      },
+      {
+        "chapterTitle": "第 四 章 獎勵",
+        "firstArticle": "46"
+      },
+      {
+        "chapterTitle": "第 五 章 附則",
+        "firstArticle": "57"
+      }
+    ]
+  },
+  {
+    "id": "都市計畫容積移轉實施辦法",
+    "name": "都市計畫容積移轉實施辦法",
+    "category": "redevelopment",
+    "categoryName": "都更重劃與土地徵收",
+    "level": "法規命令",
+    "abbr": [
+      "容移辦法",
+      "容積移轉辦法"
+    ],
+    "inExam": true,
+    "examSubject": "土地利用法規",
+    "priority": 32,
+    "modifiedDate": "20140804",
+    "totalArticles": 22,
+    "chapters": []
   },
   {
     "id": "國土計畫法",
     "name": "國土計畫法",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法律",
     "abbr": [
       "國土法"
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 21,
+    "priority": 33,
     "modifiedDate": "20250120",
     "totalArticles": 47,
     "chapters": [
@@ -1459,14 +2068,14 @@
     "id": "國土計畫法施行細則",
     "name": "國土計畫法施行細則",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "國土細則"
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 22,
+    "priority": 34,
     "modifiedDate": "20190221",
     "totalArticles": 15,
     "chapters": []
@@ -1475,14 +2084,14 @@
     "id": "區域計畫法",
     "name": "區域計畫法",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法律",
     "abbr": [
       "區域計畫法"
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 23,
+    "priority": 35,
     "modifiedDate": "20000126",
     "totalArticles": 30,
     "chapters": [
@@ -1516,14 +2125,14 @@
     "id": "區域計畫法施行細則",
     "name": "區域計畫法施行細則",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "區域細則"
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 24,
+    "priority": 36,
     "modifiedDate": "20131023",
     "totalArticles": 25,
     "chapters": [
@@ -1553,7 +2162,7 @@
     "id": "非都市土地使用管制規則",
     "name": "非都市土地使用管制規則",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "非都管制規則",
@@ -1561,7 +2170,7 @@
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 25,
+    "priority": 37,
     "modifiedDate": "20260527",
     "totalArticles": 89,
     "chapters": [
@@ -1591,14 +2200,14 @@
     "id": "都市計畫法",
     "name": "都市計畫法",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法律",
     "abbr": [
       "都計法"
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 26,
+    "priority": 38,
     "modifiedDate": "20210526",
     "totalArticles": 92,
     "chapters": [
@@ -1644,7 +2253,7 @@
     "id": "都市計畫法臺灣省施行細則",
     "name": "都市計畫法臺灣省施行細則",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "都計細則",
@@ -1652,7 +2261,7 @@
     ],
     "inExam": true,
     "examSubject": "土地利用法規",
-    "priority": 27,
+    "priority": 39,
     "modifiedDate": "20260812",
     "totalArticles": 55,
     "chapters": [
@@ -1682,14 +2291,14 @@
     "id": "建築法",
     "name": "建築法",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法律",
     "abbr": [
       "建築法"
     ],
     "inExam": false,
     "examSubject": "土地開發分析與建築法規",
-    "priority": 28,
+    "priority": 40,
     "modifiedDate": "20220511",
     "totalArticles": 123,
     "chapters": [
@@ -1735,14 +2344,14 @@
     "id": "建築技術規則總則編",
     "name": "建築技術規則總則編",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "建技總則"
     ],
     "inExam": false,
     "examSubject": "容積、建蔽率與建築規劃",
-    "priority": 29,
+    "priority": 41,
     "modifiedDate": "20201019",
     "totalArticles": 12,
     "chapters": []
@@ -1751,7 +2360,7 @@
     "id": "建築技術規則建築設計施工編",
     "name": "建築技術規則建築設計施工編",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "設計施工編",
@@ -1759,7 +2368,7 @@
     ],
     "inExam": false,
     "examSubject": "建築設計與容積計算估價",
-    "priority": 30,
+    "priority": 42,
     "modifiedDate": "20260223",
     "totalArticles": 389,
     "chapters": [
@@ -2062,17 +2671,132 @@
     ]
   },
   {
+    "id": "公寓大廈管理條例",
+    "name": "公寓大廈管理條例",
+    "category": "civil",
+    "categoryName": "民事產權與登記法規",
+    "level": "法律",
+    "abbr": [
+      "公寓大廈條例",
+      "公寓大廈"
+    ],
+    "inExam": false,
+    "examSubject": "房地區分所有與共有持分估價",
+    "priority": 43,
+    "modifiedDate": "20220511",
+    "totalArticles": 66,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 住戶之權利義務",
+        "firstArticle": "4"
+      },
+      {
+        "chapterTitle": "第 三 章 管理組織",
+        "firstArticle": "25"
+      },
+      {
+        "chapterTitle": "第 四 章 管理服務人",
+        "firstArticle": "41"
+      },
+      {
+        "chapterTitle": "第 五 章 罰則",
+        "firstArticle": "47"
+      },
+      {
+        "chapterTitle": "第 六 章 附則",
+        "firstArticle": "53"
+      }
+    ]
+  },
+  {
+    "id": "公寓大廈管理條例施行細則",
+    "name": "公寓大廈管理條例施行細則",
+    "category": "civil",
+    "categoryName": "民事產權與登記法規",
+    "level": "法規命令",
+    "abbr": [
+      "公寓細則"
+    ],
+    "inExam": false,
+    "examSubject": "實務延伸",
+    "priority": 44,
+    "modifiedDate": "20051116",
+    "totalArticles": 14,
+    "chapters": []
+  },
+  {
+    "id": "不動產經紀業管理條例",
+    "name": "不動產經紀業管理條例",
+    "category": "civil",
+    "categoryName": "民事產權與登記法規",
+    "level": "法律",
+    "abbr": [
+      "經紀業條例"
+    ],
+    "inExam": false,
+    "examSubject": "實價登錄與交易實務",
+    "priority": 45,
+    "modifiedDate": "20210127",
+    "totalArticles": 43,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 經紀業",
+        "firstArticle": "5"
+      },
+      {
+        "chapterTitle": "第 三 章 經紀人員",
+        "firstArticle": "13"
+      },
+      {
+        "chapterTitle": "第 四 章 業務及責任",
+        "firstArticle": "18"
+      },
+      {
+        "chapterTitle": "第 五 章 獎懲",
+        "firstArticle": "28"
+      },
+      {
+        "chapterTitle": "第 六 章 附則",
+        "firstArticle": "36"
+      }
+    ]
+  },
+  {
+    "id": "不動產經紀業管理條例施行細則",
+    "name": "不動產經紀業管理條例施行細則",
+    "category": "civil",
+    "categoryName": "民事產權與登記法規",
+    "level": "法規命令",
+    "abbr": [
+      "經紀業細則"
+    ],
+    "inExam": false,
+    "examSubject": "實價登錄實務",
+    "priority": 46,
+    "modifiedDate": "20020322",
+    "totalArticles": 36,
+    "chapters": []
+  },
+  {
     "id": "農業發展條例",
     "name": "農業發展條例",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法律",
     "abbr": [
       "農發條例"
     ],
     "inExam": false,
     "examSubject": "農地與農舍估價",
-    "priority": 31,
+    "priority": 47,
     "modifiedDate": "20161130",
     "totalArticles": 85,
     "chapters": [
@@ -2114,919 +2838,17 @@
     "id": "農業發展條例施行細則",
     "name": "農業發展條例施行細則",
     "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
+    "categoryName": "土地規劃與建築管制",
     "level": "法規命令",
     "abbr": [
       "農發細則"
     ],
     "inExam": false,
     "examSubject": "農地估價實務",
-    "priority": 32,
+    "priority": 48,
     "modifiedDate": "20211123",
     "totalArticles": 24,
     "chapters": []
-  },
-  {
-    "id": "文化資產保存法",
-    "name": "文化資產保存法",
-    "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
-    "level": "法律",
-    "abbr": [
-      "文資法"
-    ],
-    "inExam": false,
-    "examSubject": "古蹟容積移轉與文化資產估價",
-    "priority": 33,
-    "modifiedDate": "20260701",
-    "totalArticles": 113,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 古蹟、歷史建築、紀念建築及聚落建築群",
-        "firstArticle": "14"
-      },
-      {
-        "chapterTitle": "第 三 章 考古遺址",
-        "firstArticle": "43"
-      },
-      {
-        "chapterTitle": "第 四 章 史蹟、文化景觀",
-        "firstArticle": "60"
-      },
-      {
-        "chapterTitle": "第 五 章 古物",
-        "firstArticle": "65"
-      },
-      {
-        "chapterTitle": "第 六 章 自然地景、自然紀念物",
-        "firstArticle": "78"
-      },
-      {
-        "chapterTitle": "第 七 章 無形文化資產",
-        "firstArticle": "89"
-      },
-      {
-        "chapterTitle": "第 八 章 文化資產保存技術及保存者",
-        "firstArticle": "95"
-      },
-      {
-        "chapterTitle": "第 九 章 獎勵",
-        "firstArticle": "98"
-      },
-      {
-        "chapterTitle": "第 十 章 罰則",
-        "firstArticle": "103"
-      },
-      {
-        "chapterTitle": "第 十一 章 附則",
-        "firstArticle": "110"
-      }
-    ]
-  },
-  {
-    "id": "水土保持法",
-    "name": "水土保持法",
-    "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
-    "level": "法律",
-    "abbr": [
-      "水保法"
-    ],
-    "inExam": false,
-    "examSubject": "山坡地開發估價",
-    "priority": 34,
-    "modifiedDate": "20161130",
-    "totalArticles": 43,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 一般水土保持之處理與維護",
-        "firstArticle": "8"
-      },
-      {
-        "chapterTitle": "第 三 章 特定水土保持之處理與維護",
-        "firstArticle": "16"
-      },
-      {
-        "chapterTitle": "第 四 章 監督及管理",
-        "firstArticle": "22"
-      },
-      {
-        "chapterTitle": "第 五 章 經費及資金",
-        "firstArticle": "28"
-      },
-      {
-        "chapterTitle": "第 六 章 獎勵",
-        "firstArticle": "31"
-      },
-      {
-        "chapterTitle": "第 七 章 罰則",
-        "firstArticle": "32"
-      },
-      {
-        "chapterTitle": "第 八 章 附則",
-        "firstArticle": "37"
-      }
-    ]
-  },
-  {
-    "id": "山坡地保育利用條例",
-    "name": "山坡地保育利用條例",
-    "category": "landuse",
-    "categoryName": "土地規劃與使用管制",
-    "level": "法律",
-    "abbr": [
-      "山坡地條例"
-    ],
-    "inExam": false,
-    "examSubject": "山坡地估價實務",
-    "priority": 35,
-    "modifiedDate": "20190109",
-    "totalArticles": 44,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 農業使用",
-        "firstArticle": "16"
-      },
-      {
-        "chapterTitle": "第 三 章 非農業使用",
-        "firstArticle": "30"
-      },
-      {
-        "chapterTitle": "第 四 章 獎懲",
-        "firstArticle": "33"
-      },
-      {
-        "chapterTitle": "第 五 章 附則",
-        "firstArticle": "37"
-      }
-    ]
-  },
-  {
-    "id": "都市更新條例",
-    "name": "都市更新條例",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法律",
-    "abbr": [
-      "都更條例"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 40,
-    "modifiedDate": "20241113",
-    "totalArticles": 88,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 更新地區之劃定",
-        "firstArticle": "5"
-      },
-      {
-        "chapterTitle": "第 三 章 政府主導都市更新",
-        "firstArticle": "11"
-      },
-      {
-        "chapterTitle": "第 四 章 都市更新事業之實施",
-        "firstArticle": "22"
-      },
-      {
-        "chapterTitle": "第 五 章 權利變換",
-        "firstArticle": "48"
-      },
-      {
-        "chapterTitle": "第 六 章 獎助",
-        "firstArticle": "65"
-      },
-      {
-        "chapterTitle": "第 七 章 監督及管理",
-        "firstArticle": "74"
-      },
-      {
-        "chapterTitle": "第 八 章 罰則",
-        "firstArticle": "79"
-      },
-      {
-        "chapterTitle": "第 九 章 附則",
-        "firstArticle": "83"
-      }
-    ]
-  },
-  {
-    "id": "都市更新條例施行細則",
-    "name": "都市更新條例施行細則",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "都更細則"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 41,
-    "modifiedDate": "20190515",
-    "totalArticles": 49,
-    "chapters": []
-  },
-  {
-    "id": "都市更新權利變換實施辦法",
-    "name": "都市更新權利變換實施辦法",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "都更權利變換辦法",
-      "權變辦法"
-    ],
-    "inExam": false,
-    "examSubject": "都市更新權利變換估價核心",
-    "priority": 42,
-    "modifiedDate": "20190617",
-    "totalArticles": 33,
-    "chapters": []
-  },
-  {
-    "id": "都市危險及老舊建築物加速重建條例",
-    "name": "都市危險及老舊建築物加速重建條例",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法律",
-    "abbr": [
-      "危老條例"
-    ],
-    "inExam": false,
-    "examSubject": "危老重建估價",
-    "priority": 43,
-    "modifiedDate": "20231206",
-    "totalArticles": 15,
-    "chapters": []
-  },
-  {
-    "id": "都市危險及老舊建築物加速重建條例施行細則",
-    "name": "都市危險及老舊建築物加速重建條例施行細則",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "危老細則"
-    ],
-    "inExam": false,
-    "examSubject": "危老重建估價",
-    "priority": 44,
-    "modifiedDate": "20170801",
-    "totalArticles": 12,
-    "chapters": []
-  },
-  {
-    "id": "土地徵收條例",
-    "name": "土地徵收條例",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法律",
-    "abbr": [
-      "土徵條例"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 45,
-    "modifiedDate": "20120104",
-    "totalArticles": 71,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 徵收程序",
-        "firstArticle": "10"
-      },
-      {
-        "chapterTitle": "第 三 章 徵收補償",
-        "firstArticle": "30"
-      },
-      {
-        "chapterTitle": "第 四 章 區段徵收",
-        "firstArticle": "37"
-      },
-      {
-        "chapterTitle": "第 五 章 徵收之撤銷及廢止",
-        "firstArticle": "49"
-      },
-      {
-        "chapterTitle": "第 六 章 附則",
-        "firstArticle": "56"
-      }
-    ]
-  },
-  {
-    "id": "土地徵收條例施行細則",
-    "name": "土地徵收條例施行細則",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "土徵細則"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 46,
-    "modifiedDate": "20191216",
-    "totalArticles": 78,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 徵收程序",
-        "firstArticle": "10"
-      },
-      {
-        "chapterTitle": "第 三 章 徵收補償",
-        "firstArticle": "29"
-      },
-      {
-        "chapterTitle": "第 四 章 區段徵收",
-        "firstArticle": "34"
-      },
-      {
-        "chapterTitle": "第 五 章 徵收之撤銷及廢止",
-        "firstArticle": "56-1"
-      },
-      {
-        "chapterTitle": "第 六 章 附則",
-        "firstArticle": "62"
-      }
-    ]
-  },
-  {
-    "id": "都市計畫容積移轉實施辦法",
-    "name": "都市計畫容積移轉實施辦法",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "容移辦法",
-      "容積移轉辦法"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 47,
-    "modifiedDate": "20140804",
-    "totalArticles": 22,
-    "chapters": []
-  },
-  {
-    "id": "區段徵收實施辦法",
-    "name": "區段徵收實施辦法",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "區段徵收辦法"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 48,
-    "modifiedDate": "20121018",
-    "totalArticles": 51,
-    "chapters": []
-  },
-  {
-    "id": "市地重劃實施辦法",
-    "name": "市地重劃實施辦法",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "市地重劃辦法"
-    ],
-    "inExam": true,
-    "examSubject": "土地利用法規",
-    "priority": 49,
-    "modifiedDate": "20220901",
-    "totalArticles": 63,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 重劃地區之選定與公告禁止事項",
-        "firstArticle": "6"
-      },
-      {
-        "chapterTitle": "第 三 章 重劃計劃之擬訂、核定及公告通知",
-        "firstArticle": "14"
-      },
-      {
-        "chapterTitle": "第 四 章 測量、調查及地價查估",
-        "firstArticle": "19"
-      },
-      {
-        "chapterTitle": "第 五 章 計算負擔及分配設計",
-        "firstArticle": "21"
-      },
-      {
-        "chapterTitle": "第 六 章 土地改良物或墳墓拆遷補償及工程施工",
-        "firstArticle": "38"
-      },
-      {
-        "chapterTitle": "第 七 章 地籍登記",
-        "firstArticle": "42"
-      },
-      {
-        "chapterTitle": "第 八 章 交接及清償",
-        "firstArticle": "51"
-      },
-      {
-        "chapterTitle": "第 九 章 財務結算",
-        "firstArticle": "54"
-      },
-      {
-        "chapterTitle": "第 十 章 附則",
-        "firstArticle": "58"
-      }
-    ]
-  },
-  {
-    "id": "獎勵土地所有權人辦理市地重劃辦法",
-    "name": "獎勵土地所有權人辦理市地重劃辦法",
-    "category": "redevelopment",
-    "categoryName": "都更重劃與土地徵收",
-    "level": "法規命令",
-    "abbr": [
-      "自辦市地重劃辦法",
-      "自辦重劃"
-    ],
-    "inExam": false,
-    "examSubject": "市地重劃與抵費地估價",
-    "priority": 50,
-    "modifiedDate": "20190409",
-    "totalArticles": 63,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 重劃會之組織及職權",
-        "firstArticle": "8"
-      },
-      {
-        "chapterTitle": "第 三 章 重劃業務",
-        "firstArticle": "20"
-      },
-      {
-        "chapterTitle": "第 四 章 獎勵",
-        "firstArticle": "46"
-      },
-      {
-        "chapterTitle": "第 五 章 附則",
-        "firstArticle": "57"
-      }
-    ]
-  },
-  {
-    "id": "平均地權條例",
-    "name": "平均地權條例",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法律",
-    "abbr": [
-      "平權條例",
-      "平均地權"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 60,
-    "modifiedDate": "20230208",
-    "totalArticles": 113,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 規定地價",
-        "firstArticle": "13"
-      },
-      {
-        "chapterTitle": "第 三 章 照價徵稅",
-        "firstArticle": "17"
-      },
-      {
-        "chapterTitle": "第 四 章 照價收買",
-        "firstArticle": "27"
-      },
-      {
-        "chapterTitle": "第 五 章 漲價歸公",
-        "firstArticle": "35"
-      },
-      {
-        "chapterTitle": "第 六 章 土地使用",
-        "firstArticle": "52"
-      },
-      {
-        "chapterTitle": "第 七 章 罰則",
-        "firstArticle": "80"
-      },
-      {
-        "chapterTitle": "第 八 章 附則",
-        "firstArticle": "84"
-      }
-    ]
-  },
-  {
-    "id": "平均地權條例施行細則",
-    "name": "平均地權條例施行細則",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法規命令",
-    "abbr": [
-      "平權細則"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 61,
-    "modifiedDate": "20220816",
-    "totalArticles": 110,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 規定地價",
-        "firstArticle": "15"
-      },
-      {
-        "chapterTitle": "第 三 章 照價徵稅",
-        "firstArticle": "26"
-      },
-      {
-        "chapterTitle": "第 四 章 照價收買",
-        "firstArticle": "43"
-      },
-      {
-        "chapterTitle": "第 五 章 漲價歸公",
-        "firstArticle": "50"
-      },
-      {
-        "chapterTitle": "第 六 章 土地使用",
-        "firstArticle": "67"
-      },
-      {
-        "chapterTitle": "第 七 章 附則",
-        "firstArticle": "101"
-      }
-    ]
-  },
-  {
-    "id": "土地稅法",
-    "name": "土地稅法",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法律",
-    "abbr": [
-      "土地稅法"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 62,
-    "modifiedDate": "20250124",
-    "totalArticles": 75,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 一般規定",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 節 名詞定義",
-        "firstArticle": "7"
-      },
-      {
-        "chapterTitle": "第 二 章 地價稅",
-        "firstArticle": "14"
-      },
-      {
-        "chapterTitle": "第 三 章 田賦",
-        "firstArticle": "22"
-      },
-      {
-        "chapterTitle": "第 四 章 土地增值稅",
-        "firstArticle": "28"
-      },
-      {
-        "chapterTitle": "第 五 章 稽徵程序",
-        "firstArticle": "40"
-      },
-      {
-        "chapterTitle": "第 六 章 罰則",
-        "firstArticle": "53"
-      },
-      {
-        "chapterTitle": "第 七 章 附則",
-        "firstArticle": "57"
-      }
-    ]
-  },
-  {
-    "id": "土地稅法施行細則",
-    "name": "土地稅法施行細則",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法規命令",
-    "abbr": [
-      "土地稅細則"
-    ],
-    "inExam": true,
-    "examSubject": "民法物權與不動產法規",
-    "priority": 63,
-    "modifiedDate": "20210923",
-    "totalArticles": 65,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 地價稅",
-        "firstArticle": "5"
-      },
-      {
-        "chapterTitle": "第 三 章 田賦",
-        "firstArticle": "21"
-      },
-      {
-        "chapterTitle": "第 四 章 土地增值稅",
-        "firstArticle": "42"
-      },
-      {
-        "chapterTitle": "第 五 章 附則",
-        "firstArticle": "62"
-      }
-    ]
-  },
-  {
-    "id": "房屋稅條例",
-    "name": "房屋稅條例",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法律",
-    "abbr": [
-      "房屋稅條例"
-    ],
-    "inExam": false,
-    "examSubject": "房屋稅與差別稅率評定",
-    "priority": 64,
-    "modifiedDate": "20240103",
-    "totalArticles": 26,
-    "chapters": []
-  },
-  {
-    "id": "契稅條例",
-    "name": "契稅條例",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法律",
-    "abbr": [
-      "契稅條例"
-    ],
-    "inExam": false,
-    "examSubject": "不動產交易稅負分析",
-    "priority": 65,
-    "modifiedDate": "20100505",
-    "totalArticles": 35,
-    "chapters": []
-  },
-  {
-    "id": "國有財產法",
-    "name": "國有財產法",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法律",
-    "abbr": [
-      "國產法"
-    ],
-    "inExam": false,
-    "examSubject": "公有土地標售與地上權估價",
-    "priority": 66,
-    "modifiedDate": "20181121",
-    "totalArticles": 79,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 機構",
-        "firstArticle": "9"
-      },
-      {
-        "chapterTitle": "第 三 章 保管",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 登記",
-        "firstArticle": "17"
-      },
-      {
-        "chapterTitle": "第 二 節 產籍",
-        "firstArticle": "21"
-      },
-      {
-        "chapterTitle": "第 三 節 維護",
-        "firstArticle": "25"
-      },
-      {
-        "chapterTitle": "第 四 章 使用",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 公用財產之用途",
-        "firstArticle": "32"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產之撥用",
-        "firstArticle": "38"
-      },
-      {
-        "chapterTitle": "第 三 節 非公用財產之借用",
-        "firstArticle": "40"
-      },
-      {
-        "chapterTitle": "第 五 章 收益",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 非公用財產之出租",
-        "firstArticle": "42"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產之利用",
-        "firstArticle": "46"
-      },
-      {
-        "chapterTitle": "第 六 章 處分",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 非公用財產類不動產之處分",
-        "firstArticle": "49"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產類動產、有價證券及權利之處分",
-        "firstArticle": "55"
-      },
-      {
-        "chapterTitle": "第 三 節 計價",
-        "firstArticle": "58"
-      },
-      {
-        "chapterTitle": "第 四 節 贈與",
-        "firstArticle": "60"
-      },
-      {
-        "chapterTitle": "第 七 章 檢核",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 財產檢查",
-        "firstArticle": "61"
-      },
-      {
-        "chapterTitle": "第 二 節 財產報告",
-        "firstArticle": "64"
-      },
-      {
-        "chapterTitle": "第 八 章 附則",
-        "firstArticle": "71"
-      }
-    ]
-  },
-  {
-    "id": "國有財產法施行細則",
-    "name": "國有財產法施行細則",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "法規命令",
-    "abbr": [
-      "國產細則"
-    ],
-    "inExam": false,
-    "examSubject": "公有財產估價作業",
-    "priority": 67,
-    "modifiedDate": "20100723",
-    "totalArticles": 85,
-    "chapters": [
-      {
-        "chapterTitle": "第 一 章 總則",
-        "firstArticle": "1"
-      },
-      {
-        "chapterTitle": "第 二 章 機構",
-        "firstArticle": "8"
-      },
-      {
-        "chapterTitle": "第 三 章 保管",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 登記",
-        "firstArticle": "12"
-      },
-      {
-        "chapterTitle": "第 二 節 產籍",
-        "firstArticle": "17"
-      },
-      {
-        "chapterTitle": "第 三 節 維護",
-        "firstArticle": "22"
-      },
-      {
-        "chapterTitle": "第 四 章 使用",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 公用財產之用途",
-        "firstArticle": "26"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產之撥用",
-        "firstArticle": "30"
-      },
-      {
-        "chapterTitle": "第 三 節 非公用財產之借用",
-        "firstArticle": "39"
-      },
-      {
-        "chapterTitle": "第 五 章 收益",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 非公用財產之出租",
-        "firstArticle": "43-1"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產之利用",
-        "firstArticle": "48"
-      },
-      {
-        "chapterTitle": "第 六 章 處分",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 非公用財產類不動產之處分",
-        "firstArticle": "49"
-      },
-      {
-        "chapterTitle": "第 二 節 非公用財產類動產有價證券及權利之處分",
-        "firstArticle": "58"
-      },
-      {
-        "chapterTitle": "第 三 節 計價",
-        "firstArticle": "61"
-      },
-      {
-        "chapterTitle": "第 四 節 贈與",
-        "firstArticle": "63"
-      },
-      {
-        "chapterTitle": "第 七 章 檢核",
-        "firstArticle": ""
-      },
-      {
-        "chapterTitle": "第 一 節 財產檢查",
-        "firstArticle": "64"
-      },
-      {
-        "chapterTitle": "第 二 節 財產報告",
-        "firstArticle": "67"
-      },
-      {
-        "chapterTitle": "第 八 章 附則",
-        "firstArticle": "68-1"
-      }
-    ]
   },
   {
     "id": "不動產證券化條例",
@@ -3039,7 +2861,7 @@
     ],
     "inExam": false,
     "examSubject": "不動產投資信託 REITs 估價",
-    "priority": 68,
+    "priority": 49,
     "modifiedDate": "20171206",
     "totalArticles": 71,
     "chapters": [
@@ -3098,28 +2920,6 @@
     ]
   },
   {
-    "id": "國有財產計價方式",
-    "name": "國有財產計價方式",
-    "category": "tax",
-    "categoryName": "土地稅制與公有財產",
-    "level": "行政規則",
-    "abbr": [
-      "國產計價方式",
-      "國有財產計價"
-    ],
-    "inExam": false,
-    "examSubject": "公有土地讓售、標售底價與地上權估價實務",
-    "priority": 68,
-    "modifiedDate": "111.08.19",
-    "totalArticles": 8,
-    "chapters": [
-      {
-        "chapterTitle": "全文",
-        "firstArticle": "1"
-      }
-    ]
-  },
-  {
     "id": "不動產證券化條例施行細則",
     "name": "不動產證券化條例施行細則",
     "category": "tax",
@@ -3130,9 +2930,209 @@
     ],
     "inExam": false,
     "examSubject": "不動產證券化估價",
-    "priority": 69,
+    "priority": 50,
     "modifiedDate": "20090619",
     "totalArticles": 14,
     "chapters": []
+  },
+  {
+    "id": "信託法",
+    "name": "信託法",
+    "category": "civil",
+    "categoryName": "民事產權與登記法規",
+    "level": "法律",
+    "abbr": [
+      "信託法"
+    ],
+    "inExam": false,
+    "examSubject": "不動產投資與信託估價",
+    "priority": 51,
+    "modifiedDate": "20091230",
+    "totalArticles": 86,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 信託財產",
+        "firstArticle": "9"
+      },
+      {
+        "chapterTitle": "第 三 章 受益人",
+        "firstArticle": "17"
+      },
+      {
+        "chapterTitle": "第 四 章 受託人",
+        "firstArticle": "21"
+      },
+      {
+        "chapterTitle": "第 五 章 信託監察人",
+        "firstArticle": "52"
+      },
+      {
+        "chapterTitle": "第 六 章 信託之監督",
+        "firstArticle": "60"
+      },
+      {
+        "chapterTitle": "第 七 章 信託關係之消滅",
+        "firstArticle": "62"
+      },
+      {
+        "chapterTitle": "第 八 章 公益信託",
+        "firstArticle": "69"
+      },
+      {
+        "chapterTitle": "第 九 章 附則",
+        "firstArticle": "86"
+      }
+    ]
+  },
+  {
+    "id": "文化資產保存法",
+    "name": "文化資產保存法",
+    "category": "landuse",
+    "categoryName": "土地規劃與建築管制",
+    "level": "法律",
+    "abbr": [
+      "文資法"
+    ],
+    "inExam": false,
+    "examSubject": "古蹟容積移轉與文化資產估價",
+    "priority": 52,
+    "modifiedDate": "20260701",
+    "totalArticles": 113,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 古蹟、歷史建築、紀念建築及聚落建築群",
+        "firstArticle": "14"
+      },
+      {
+        "chapterTitle": "第 三 章 考古遺址",
+        "firstArticle": "43"
+      },
+      {
+        "chapterTitle": "第 四 章 史蹟、文化景觀",
+        "firstArticle": "60"
+      },
+      {
+        "chapterTitle": "第 五 章 古物",
+        "firstArticle": "65"
+      },
+      {
+        "chapterTitle": "第 六 章 自然地景、自然紀念物",
+        "firstArticle": "78"
+      },
+      {
+        "chapterTitle": "第 七 章 無形文化資產",
+        "firstArticle": "89"
+      },
+      {
+        "chapterTitle": "第 八 章 文化資產保存技術及保存者",
+        "firstArticle": "95"
+      },
+      {
+        "chapterTitle": "第 九 章 獎勵",
+        "firstArticle": "98"
+      },
+      {
+        "chapterTitle": "第 十 章 罰則",
+        "firstArticle": "103"
+      },
+      {
+        "chapterTitle": "第 十一 章 附則",
+        "firstArticle": "110"
+      }
+    ]
+  },
+  {
+    "id": "水土保持法",
+    "name": "水土保持法",
+    "category": "landuse",
+    "categoryName": "土地規劃與建築管制",
+    "level": "法律",
+    "abbr": [
+      "水保法"
+    ],
+    "inExam": false,
+    "examSubject": "山坡地開發估價",
+    "priority": 53,
+    "modifiedDate": "20161130",
+    "totalArticles": 43,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 一般水土保持之處理與維護",
+        "firstArticle": "8"
+      },
+      {
+        "chapterTitle": "第 三 章 特定水土保持之處理與維護",
+        "firstArticle": "16"
+      },
+      {
+        "chapterTitle": "第 四 章 監督及管理",
+        "firstArticle": "22"
+      },
+      {
+        "chapterTitle": "第 五 章 經費及資金",
+        "firstArticle": "28"
+      },
+      {
+        "chapterTitle": "第 六 章 獎勵",
+        "firstArticle": "31"
+      },
+      {
+        "chapterTitle": "第 七 章 罰則",
+        "firstArticle": "32"
+      },
+      {
+        "chapterTitle": "第 八 章 附則",
+        "firstArticle": "37"
+      }
+    ]
+  },
+  {
+    "id": "山坡地保育利用條例",
+    "name": "山坡地保育利用條例",
+    "category": "landuse",
+    "categoryName": "土地規劃與建築管制",
+    "level": "法律",
+    "abbr": [
+      "山坡地條例"
+    ],
+    "inExam": false,
+    "examSubject": "山坡地估價實務",
+    "priority": 54,
+    "modifiedDate": "20190109",
+    "totalArticles": 44,
+    "chapters": [
+      {
+        "chapterTitle": "第 一 章 總則",
+        "firstArticle": "1"
+      },
+      {
+        "chapterTitle": "第 二 章 農業使用",
+        "firstArticle": "16"
+      },
+      {
+        "chapterTitle": "第 三 章 非農業使用",
+        "firstArticle": "30"
+      },
+      {
+        "chapterTitle": "第 四 章 獎懲",
+        "firstArticle": "33"
+      },
+      {
+        "chapterTitle": "第 五 章 附則",
+        "firstArticle": "37"
+      }
+    ]
   }
 ]
