@@ -596,7 +596,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (status === 'playing' || status === 'paused') {
       el.audioPlayerBar.classList.add('active');
       el.playerTitle.textContent = `朗讀中：《${data.lawName}》${data.rawNo}`;
-      el.btnPlayerToggle.textContent = status === 'playing' ? '⏸ 暫停' : '▶ 播放';
+      el.btnPlayerToggle.textContent = status === 'playing' ? '⏸' : '▶';
+      el.btnPlayerToggle.title = status === 'playing' ? '暫停朗讀' : '繼續朗讀';
 
       const card = document.getElementById(`art-${data.num}`);
       if (card) {

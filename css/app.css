@@ -1011,16 +1011,32 @@ body {
   background-color: var(--border-light);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 4px 9px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0 8px;
   border-radius: 14px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  justify-content: center;
   white-space: nowrap;
   transition: all 0.15s ease;
+}
+
+#btnPlayerToggle, #btnPlayerNext {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+#btnPlayerSpeed {
+  font-size: 0.74rem;
+  padding: 0 6px;
 }
 
 .btn-player:hover, .btn-player:active {
@@ -1205,15 +1221,22 @@ body {
   }
 
   .player-info {
-    font-size: 0.78rem;
-    max-width: 130px;
+    font-size: 0.8rem;
+    max-width: calc(100vw - 155px);
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .btn-player {
-    padding: 3px 7px;
-    font-size: 0.74rem;
+    height: 26px;
+    min-width: 26px;
+    font-size: 0.76rem;
+  }
+
+  #btnPlayerToggle, #btnPlayerNext {
+    width: 26px;
+    height: 26px;
+    font-size: 0.82rem;
   }
 
   .modal-box {
