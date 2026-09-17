@@ -9,6 +9,7 @@ class LawTTSPlayer {
     this.currentUtterance = null;
     this.isPlaying = false;
     this.isPaused = false;
+    this.isTransitioning = false;
     this.rate = parseFloat(localStorage.getItem('val_tts_rate') || '1.0');
     this.selectedVoice = null;
     this.currentArticleData = null;
@@ -22,6 +23,7 @@ class LawTTSPlayer {
   }
 
   initVoices() {
+    if (!this.synth) return;
     const voices = this.synth.getVoices();
     // 優先挑選台灣繁體中文 (zh-TW) 自然人聲
     const twVoices = voices.filter(v => v.lang === 'zh-TW' || v.lang === 'zh_TW');
@@ -78,7 +80,7 @@ class LawTTSPlayer {
    * @param {boolean} includeLawName 語音內容是否包含法規名稱（預設 false，不重複唸）
    */
   play(lawName, rawNo, num, paragraphs, autoNext = true, includeLawName = false) {
-    this.stop();
+    this.stop(false);
 
     if (!this.synth) {
       alert('您的瀏覽器不支援語音朗讀功能');
@@ -97,24 +99,42 @@ class LawTTSPlayer {
     utterance.pitch = 1.0;
 
     utterance.onstart = () => {
+      if (this.currentUtterance !== utterance) return;
       this.isPlaying = true;
       this.isPaused = false;
       this.notifyStatus('playing');
     };
 
     utterance.onend = () => {
+      // 僅響應當前正活躍的 utterance，若已被中途取消則忽略
+      if (this.currentUtterance !== utterance) return;
+      this.currentUtterance = null;
       this.isPlaying = false;
       this.isPaused = false;
       this.notifyStatus('ended');
 
-      // 若開啟連續朗讀，自動播放下一條
-      if (this.currentArticleData && this.currentArticleData.autoNext && this.onNextArticle) {
-        this.onNextArticle(this.currentArticleData.num);
+      // 若開啟連續朗讀且未在換條過渡中，自動播放下一條
+      if (this.currentArticleData && this.currentArticleData.autoNext && this.onNextArticle && !this.isTransitioning) {
+        this.isTransitioning = true;
+        const currentNum = this.currentArticleData.num;
+        setTimeout(() => {
+          this.isTransitioning = false;
+          if (this.onNextArticle) {
+            this.onNextArticle(currentNum);
+          }
+        }, 80);
       }
     };
 
     utterance.onerror = (e) => {
+      if (this.currentUtterance !== utterance) return;
+      // 忽略因使用者切換、暫停或取消引發的正常中斷錯誤
+      if (e.error === 'canceled' || e.error === 'interrupted') {
+        this.currentUtterance = null;
+        return;
+      }
       console.warn('TTS Error:', e);
+      this.currentUtterance = null;
       this.isPlaying = false;
       this.isPaused = false;
       this.notifyStatus('error');
@@ -125,7 +145,7 @@ class LawTTSPlayer {
   }
 
   pause() {
-    if (this.synth.speaking && !this.synth.paused) {
+    if (this.synth && this.synth.speaking && !this.synth.paused) {
       this.synth.pause();
       this.isPaused = true;
       this.notifyStatus('paused');
@@ -133,29 +153,73 @@ class LawTTSPlayer {
   }
 
   resume() {
-    if (this.synth.paused) {
+    if (this.synth && this.synth.paused) {
       this.synth.resume();
       this.isPaused = false;
       this.notifyStatus('playing');
     }
   }
 
-  stop() {
+  /**
+   * 停止當前語音
+   * @param {boolean} notify 是否通知外部狀態已停止（內部切換或重載時設為 false）
+   */
+  stop(notify = true) {
+    // 關鍵修復：在呼叫 synth.cancel() 前，徹底解除舊 utterance 的所有事件回呼
+    // 防止瀏覽器在取消時向舊 utterance 派發 onend/onerror，導致連鎖觸發 onNextArticle 跳過法條
+    if (this.currentUtterance) {
+      this.currentUtterance.onstart = null;
+      this.currentUtterance.onend = null;
+      this.currentUtterance.onerror = null;
+      this.currentUtterance = null;
+    }
+
     if (this.synth) {
       this.synth.cancel();
     }
     this.isPlaying = false;
     this.isPaused = false;
-    this.notifyStatus('stopped');
+    if (notify) {
+      this.notifyStatus('stopped');
+    }
   }
 
+  /**
+   * 手動點擊「下一條」時調用，具防抖與精準單步推進機制
+   */
+  skipNext() {
+    if (this.isTransitioning) return;
+    this.isTransitioning = true;
+    setTimeout(() => {
+      this.isTransitioning = false;
+    }, 350);
+
+    if (this.currentArticleData && this.onNextArticle) {
+      const currentNum = this.currentArticleData.num;
+      // 停止當前朗讀（不重置外部播放條 UI）
+      this.stop(false);
+      setTimeout(() => {
+        if (this.onNextArticle) {
+          this.onNextArticle(currentNum);
+        }
+      }, 50);
+    }
+  }
+
+  /**
+   * 調整朗讀速度，並平滑重新朗讀當前條文（不會跳到其他條文）
+   * @param {string|number} newRate 新速度（例如 1.2）
+   */
   setRate(newRate) {
     this.rate = parseFloat(newRate);
     localStorage.setItem('val_tts_rate', this.rate.toString());
-    // 若正在播放，重啟以套用語速
-    if (this.isPlaying && this.currentArticleData) {
-      const d = this.currentArticleData;
-      this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
+    // 若正在播放或暫停中，精確重啟當前同一法條
+    if ((this.isPlaying || this.isPaused) && this.currentArticleData) {
+      const d = { ...this.currentArticleData };
+      this.stop(false);
+      setTimeout(() => {
+        this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
+      }, 60);
     }
   }
 

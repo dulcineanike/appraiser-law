@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const ttsPlayer = new LawTTSPlayer();
+  if (el.btnPlayerSpeed) {
+    el.btnPlayerSpeed.textContent = `${ttsPlayer.rate.toFixed(1)}x`;
+  }
 
   // Apply Theme & Font size
   document.documentElement.setAttribute('data-theme', state.theme);
@@ -616,7 +619,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   ttsPlayer.onNextArticle = (currentNum) => {
-    const law = state.lawsData.find(l => l.id === state.currentLawId);
+    const law = state.lawsData.find(l => l.id === state.currentLawId || l.name === ttsPlayer.currentArticleData?.lawName);
     if (!law) return;
     const currentIdx = law.articles.findIndex(a => a.num === currentNum);
     if (currentIdx >= 0 && currentIdx + 1 < law.articles.length) {
@@ -631,7 +634,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  el.btnPlayerToggle?.addEventListener('click', () => {
+  el.btnPlayerToggle?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (ttsPlayer.isPaused) {
       ttsPlayer.resume();
     } else if (ttsPlayer.isPlaying) {
@@ -639,13 +644,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  el.btnPlayerNext?.addEventListener('click', () => {
-    if (ttsPlayer.currentArticleData) {
-      ttsPlayer.onNextArticle(ttsPlayer.currentArticleData.num);
-    }
+  el.btnPlayerNext?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    ttsPlayer.skipNext();
   });
 
-  el.btnPlayerSpeed?.addEventListener('click', () => {
+  el.btnPlayerSpeed?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const rates = ['0.8', '1.0', '1.2', '1.5'];
     let current = ttsPlayer.rate.toFixed(1);
     let idx = rates.indexOf(current);
@@ -656,7 +663,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     showToast(`語速已調整為 ${nextRate}x`);
   });
 
-  el.btnPlayerClose?.addEventListener('click', () => {
+  el.btnPlayerClose?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     ttsPlayer.stop();
   });
 
