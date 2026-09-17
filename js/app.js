@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     modalCloseBtn: document.getElementById('modalCloseBtn'),
     toast: document.getElementById('toast'),
     navTabs: document.querySelectorAll('.nav-tab-btn'),
+    bulletinsSidebarContainer: document.getElementById('bulletinsSidebarContainer'),
     fabJump: document.getElementById('fabJump'),
     audioPlayerBar: document.getElementById('audioPlayerBar'),
     playerTitle: document.getElementById('playerTitle'),
@@ -77,6 +78,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderCategories();
     renderLawList();
     renderReaderView(state.currentLawId);
+    renderBulletinsSidebarList();
+    updateBookmarkBadge();
   } catch (err) {
     console.error('Error loading legal database:', err);
     el.mainContent.innerHTML = `<div style="padding: 30px; text-align: center; color: red;">載入法規資料庫失敗，請確認資料檔案是否存在。</div>`;
@@ -181,17 +184,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderSearchResults(result, query);
   }
 
-  // Bottom Nav Tabs
-  el.navTabs.forEach(tab => {
+  // Nav Tabs (Desktop Header & Mobile Bottom Nav)
+  document.querySelectorAll('.nav-tab-btn').forEach(tab => {
     tab.addEventListener('click', () => {
       const view = tab.getAttribute('data-view');
       switchView(view);
     });
   });
 
-  function switchView(viewName) {
+  // Sidebar Mode Buttons (Laws vs Bulletins)
+  document.querySelectorAll('.sidebar-mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.getAttribute('data-view');
+      switchView(view);
+    });
+  });
+
+  // Logo / Brand Home Click
+  document.getElementById('btnHome')?.addEventListener('click', (e) => {
+    if (e.target.closest('#btnToggleSidebar')) return;
+    switchView('reader');
+    state.currentLawId = 'law-1';
+    renderLawList();
+    renderReaderView('law-1');
+  });
+
+  function switchView(viewName, targetBulletinId = null) {
     state.currentView = viewName;
-    el.navTabs.forEach(t => {
+
+    // Synchronize all tab buttons (Header & Mobile Bottom Nav)
+    document.querySelectorAll('.nav-tab-btn').forEach(t => {
       if (t.getAttribute('data-view') === viewName) {
         t.classList.add('active');
       } else {
@@ -199,13 +221,41 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
+    // Synchronize sidebar mode buttons
+    document.querySelectorAll('.sidebar-mode-btn').forEach(btn => {
+      if (btn.getAttribute('data-view') === viewName) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    const catContainer = el.categoryContainer || document.getElementById('categoryContainer');
+    const lawListContainer = el.lawListContainer || document.getElementById('lawListContainer');
+    const bullContainer = el.bulletinsSidebarContainer || document.getElementById('bulletinsSidebarContainer');
+
     if (viewName === 'reader') {
+      if (catContainer) catContainer.style.display = 'flex';
+      if (lawListContainer) lawListContainer.style.display = 'block';
+      if (bullContainer) bullContainer.style.display = 'none';
       renderReaderView(state.currentLawId);
     } else if (viewName === 'bulletins') {
-      renderBulletinsView();
+      if (catContainer) catContainer.style.display = 'none';
+      if (lawListContainer) lawListContainer.style.display = 'none';
+      if (bullContainer) {
+        bullContainer.style.display = 'block';
+        renderBulletinsSidebarList(targetBulletinId);
+      }
+      renderBulletinsView(targetBulletinId);
     } else if (viewName === 'bookmarks') {
+      if (catContainer) catContainer.style.display = 'none';
+      if (lawListContainer) lawListContainer.style.display = 'none';
+      if (bullContainer) bullContainer.style.display = 'none';
       renderBookmarksView();
     } else if (viewName === 'search') {
+      if (catContainer) catContainer.style.display = 'flex';
+      if (lawListContainer) lawListContainer.style.display = 'block';
+      if (bullContainer) bullContainer.style.display = 'none';
       if (state.currentSearchQuery) {
         const result = searchEngine.search(state.currentSearchQuery);
         renderSearchResults(result, state.currentSearchQuery);
@@ -236,6 +286,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderCategories() {
     const cats = [
       { id: 'all', name: '全部法規' },
+      { id: 'bulletins_chip', name: '📑 估價公報 (15)' },
       { id: 'civil', name: '民事產權' },
       { id: 'valuation', name: '估價技術' },
       { id: 'exam', name: '考試大綱' },
@@ -252,7 +303,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     el.categoryContainer.querySelectorAll('.category-chip').forEach(chip => {
       chip.addEventListener('click', () => {
-        state.currentCategory = chip.getAttribute('data-cat');
+        const cat = chip.getAttribute('data-cat');
+        if (cat === 'bulletins_chip') {
+          switchView('bulletins');
+          return;
+        }
+        state.currentCategory = cat;
+        if (state.currentView !== 'reader') {
+          switchView('reader');
+        }
         renderCategories();
         renderLawList();
       });
@@ -489,6 +548,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           showToast('已加入收藏夾');
         }
         localStorage.setItem('val_bookmarks', JSON.stringify(state.bookmarks));
+        updateBookmarkBadge();
       });
     });
 
@@ -659,6 +719,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderReaderView(state.currentLawId, e.detail.artNum);
   });
 
+  window.addEventListener('nav-bulletin', (e) => {
+    switchView('bulletins', e.detail.bulletinId);
+  });
+
+  // Render Bulletins in Sidebar
+  function renderBulletinsSidebarList(targetBulletinId = null) {
+    const container = el.bulletinsSidebarContainer || document.getElementById('bulletinsSidebarContainer');
+    if (!container || !state.bulletinsData || state.bulletinsData.length === 0) return;
+
+    container.innerHTML = state.bulletinsData.map(b => `
+      <div class="bulletin-nav-item ${targetBulletinId === b.id ? 'active' : ''}" data-id="${b.id}">
+        <div class="bulletin-nav-header">
+          <span class="bulletin-nav-badge">${b.shortTitle}</span>
+          <span class="bulletin-nav-subject">${b.subject || ''}</span>
+        </div>
+        <div class="bulletin-nav-title">${b.title.replace(/^第.*?號公報[：:]\s*/, '')}</div>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.bulletin-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const id = item.getAttribute('data-id');
+        container.querySelectorAll('.bulletin-nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        if (state.currentView !== 'bulletins') {
+          switchView('bulletins', id);
+        } else {
+          const targetEl = document.getElementById(id);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+        if (window.innerWidth < 768) {
+          toggleSidebar(false);
+        }
+      });
+    });
+  }
+
+  // Update Bookmark Count Badge
+  function updateBookmarkBadge() {
+    document.querySelectorAll('.bookmark-count-badge').forEach(b => {
+      b.textContent = state.bookmarks ? state.bookmarks.length : 0;
+    });
+  }
+
   // Render Bulletins View (1-15 ROCREAA Bulletins)
   function renderBulletinsView(targetBulletinId = null) {
     let html = `
@@ -797,7 +904,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           `;
         } else if (hit.type === 'bulletin') {
           html += `
-            <div class="search-hit-card" onclick="document.querySelector('[data-view=bulletins]').click(); setTimeout(() => document.getElementById('${hit.id}')?.scrollIntoView({behavior:'smooth'}), 150);">
+            <div class="search-hit-card" onclick="window.dispatchEvent(new CustomEvent('nav-bulletin', {detail: {bulletinId: '${hit.id}'}}))">
               <div class="hit-law-title">
                 <span>${hit.title}</span>
                 <span class="bulletin-badge">公會公報</span>

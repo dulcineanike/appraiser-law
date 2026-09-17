@@ -36,6 +36,35 @@
       <span class="brand-badge">高考 / 實務</span>
     </div>
 
+    <!-- Desktop Navigation Tabs (Visible on screens >= 768px) -->
+    <nav class="header-nav" id="headerNav">
+      <button class="nav-tab-btn header-tab-btn active" data-view="reader" title="54 部估價母法子法全文">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>法規條文</span>
+        <span class="nav-count-badge">54</span>
+      </button>
+      <button class="nav-tab-btn header-tab-btn" data-view="bulletins" title="中華民國估價師公會全聯會 15 號技術公報">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+        <span>公會公報</span>
+        <span class="nav-count-badge">15</span>
+      </button>
+      <button class="nav-tab-btn header-tab-btn" data-view="bookmarks" title="我的法條收藏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        <span>我的收藏</span>
+        <span class="nav-count-badge bookmark-count-badge">0</span>
+      </button>
+    </nav>
+
     <div class="header-actions">
       <button class="btn-icon" id="btnFontToggle" title="調整字體大小" aria-label="調整字體大小">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -59,7 +88,7 @@
     <!-- Sidebar Backdrop for Mobile -->
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-    <!-- Left Sidebar: Search & Law Catalog -->
+    <!-- Left Sidebar: Search, Mode & Catalog -->
     <aside class="sidebar" id="sidebar">
       <!-- Search Input -->
       <div class="sidebar-search-box">
@@ -72,11 +101,34 @@
         </div>
       </div>
 
+      <!-- Sidebar Mode Switcher -->
+      <div class="sidebar-mode-bar" id="sidebarModeBar">
+        <button class="sidebar-mode-btn active" data-view="reader">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>法規庫 (54)</span>
+        </button>
+        <button class="sidebar-mode-btn" data-view="bulletins">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+          <span>公會公報 (15)</span>
+        </button>
+      </div>
+
       <!-- Categories Filter -->
       <div class="sidebar-categories" id="categoryContainer"></div>
 
       <!-- Laws List -->
       <div class="law-list" id="lawListContainer"></div>
+
+      <!-- Bulletins Sidebar List -->
+      <div class="bulletins-sidebar-list" id="bulletinsSidebarContainer" style="display: none;"></div>
     </aside>
 
     <!-- Main Content Reader Pane -->
