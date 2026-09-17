@@ -82,6 +82,20 @@
     </div>
   </header>
 
+  <!-- Top Audio Player Bar (Embedded under Header) -->
+  <div class="audio-player-bar" id="audioPlayerBar">
+    <div class="player-info">
+      <span class="pulse-dot"></span>
+      <span id="playerTitle">正在朗讀：第 1 條</span>
+    </div>
+    <div class="player-controls">
+      <button class="btn-player" id="btnPlayerToggle" title="播放/暫停">⏸ 暫停</button>
+      <button class="btn-player" id="btnPlayerNext" title="朗讀下一條">⏭ 下一條</button>
+      <button class="btn-player" id="btnPlayerSpeed" title="切換語速">1.0x</button>
+      <button class="btn-player-close" id="btnPlayerClose" title="停止朗讀">✕</button>
+    </div>
+  </div>
+
   <!-- Main Container -->
   <div class="app-container">
     
@@ -190,20 +204,6 @@
         <button class="btn-icon" id="modalCloseBtn" aria-label="關閉">✕</button>
       </div>
       <div class="modal-content" id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Floating Audio Player Bar -->
-  <div class="audio-player-bar" id="audioPlayerBar">
-    <div class="player-info">
-      <span class="pulse-dot"></span>
-      <span id="playerTitle">正在朗讀：第 1 條</span>
-    </div>
-    <div class="player-controls">
-      <button class="btn-player" id="btnPlayerToggle" title="播放/暫停">⏸ 暫停</button>
-      <button class="btn-player" id="btnPlayerNext" title="朗讀下一條">⏭ 下一條</button>
-      <button class="btn-player" id="btnPlayerSpeed" title="切換語速">1.0x</button>
-      <button class="btn-player-close" id="btnPlayerClose" title="停止朗讀">✕</button>
     </div>
   </div>
 

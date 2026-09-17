@@ -947,37 +947,41 @@ body {
   transform: scale(0.92);
 }
 
-/* Audio Player Bar */
+/* Audio Player Bar (Embedded under Header) */
 .audio-player-bar {
-  position: fixed;
-  bottom: calc(var(--bottom-bar-height) + var(--safe-bottom) + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(140%);
+  display: none !important;
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 32px;
-  padding: 8px 14px;
-  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px calc(14px + var(--safe-right)) 8px calc(14px + var(--safe-left));
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-  z-index: 90;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  max-width: calc(100vw - 24px - var(--safe-left) - var(--safe-right));
-  width: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  z-index: 35;
+  flex-shrink: 0;
+  width: 100%;
 }
 
 .audio-player-bar.active {
-  transform: translateX(-50%) translateY(0);
+  display: flex !important;
 }
 
 .player-info {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   color: var(--primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.player-info #playerTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -987,6 +991,7 @@ body {
   border-radius: 50%;
   background-color: #22c55e;
   animation: pulse-ring 1.5s infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse-ring {
@@ -998,21 +1003,24 @@ body {
 .player-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .btn-player {
   background-color: var(--border-light);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  padding: 4px 10px;
-  border-radius: 16px;
-  font-size: 0.82rem;
+  padding: 4px 9px;
+  border-radius: 14px;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
 }
 
 .btn-player:hover, .btn-player:active {
@@ -1025,8 +1033,18 @@ body {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   padding: 2px 6px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.btn-player-close:hover {
+  color: #ef4444;
 }
 
 /* Article card being read aloud */
