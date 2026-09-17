@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const bullContainer = el.bulletinsSidebarContainer || document.getElementById('bulletinsSidebarContainer');
 
     if (viewName === 'reader') {
-      if (catContainer) catContainer.style.display = 'flex';
+      if (catContainer) catContainer.style.display = 'grid';
       if (lawListContainer) lawListContainer.style.display = 'block';
       if (bullContainer) bullContainer.style.display = 'none';
       renderReaderView(state.currentLawId);
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (bullContainer) bullContainer.style.display = 'none';
       renderBookmarksView();
     } else if (viewName === 'search') {
-      if (catContainer) catContainer.style.display = 'flex';
+      if (catContainer) catContainer.style.display = 'grid';
       if (lawListContainer) lawListContainer.style.display = 'block';
       if (bullContainer) bullContainer.style.display = 'none';
       if (state.currentSearchQuery) {
@@ -289,10 +289,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderCategories() {
     const cats = [
       { id: 'all', name: '全部法規' },
-      { id: 'bulletins_chip', name: '📑 估價公報 (15)' },
       { id: 'civil', name: '民事產權' },
       { id: 'valuation', name: '估價技術' },
-      { id: 'exam', name: '考試大綱' },
       { id: 'tax', name: '稅制公產' },
       { id: 'redevelopment', name: '都更重劃' },
       { id: 'landuse', name: '土地利用' }
@@ -307,10 +305,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     el.categoryContainer.querySelectorAll('.category-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         const cat = chip.getAttribute('data-cat');
-        if (cat === 'bulletins_chip') {
-          switchView('bulletins');
-          return;
-        }
         state.currentCategory = cat;
         if (state.currentView !== 'reader') {
           switchView('reader');
@@ -324,9 +318,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Render Sidebar Law List
   function renderLawList() {
     let filtered = state.lawsIndex;
-    if (state.currentCategory === 'exam') {
-      filtered = filtered.filter(l => l.inExam);
-    } else if (state.currentCategory !== 'all') {
+    if (state.currentCategory !== 'all') {
       filtered = filtered.filter(l => l.category === state.currentCategory);
     }
 
@@ -334,7 +326,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="law-item ${state.currentLawId === l.id ? 'active' : ''}" data-id="${l.id}">
         <div class="law-item-title">
           <span>${l.name}</span>
-          ${l.inExam ? '<span class="badge-exam">命題大綱</span>' : ''}
         </div>
         <div class="law-item-meta">
           <span class="badge-level">${l.level}</span>
@@ -368,13 +359,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="law-header-title-row">
             <h1 class="law-main-title">${law.name}</h1>
             <div class="law-header-tags">
-              ${law.inExam ? '<span class="badge-exam">★ 專技高考命題大綱</span>' : ''}
               <span class="badge-level">${law.level}</span>
               <span class="badge-level">${law.categoryName}</span>
             </div>
           </div>
           <div class="law-header-meta">
-            ${law.examSubject ? `<span><strong>應試考科：</strong>${law.examSubject}</span>` : ''}
             <span><strong>總條數：</strong>${law.totalArticles} 條</span>
             ${law.modifiedDate ? `<span><strong>最新修正：</strong>${law.modifiedDate}</span>` : ''}
             ${law.lawURL ? `<span><a href="${law.lawURL}" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;">官方連結 ↗</a></span>` : ''}
@@ -433,6 +422,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Attach article events (copy, bookmark, cross ref)
     attachArticleEvents(law);
+
+    // Support horizontal mouse wheel scrolling on quick jump bar
+    const qjBar = el.mainContent.querySelector('.quick-jump-bar');
+    if (qjBar) {
+      qjBar.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0 && qjBar.scrollWidth > qjBar.clientWidth) {
+          e.preventDefault();
+          qjBar.scrollLeft += e.deltaY;
+        }
+      }, { passive: false });
+    }
 
     // If target jump article specified
     if (jumpArticleNo) {
@@ -907,7 +907,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="search-hit-card" onclick="window.dispatchEvent(new CustomEvent('nav-law', {detail: {lawId: '${hit.lawId}', artNum: '${hit.articleNum}'}}))">
               <div class="hit-law-title">
                 <span>《${hit.lawName}》${hit.articleNo}</span>
-                ${hit.inExam ? '<span class="badge-exam">考試大綱</span>' : ''}
               </div>
               <div class="hit-snippet">${hlSnippet}</div>
             </div>
