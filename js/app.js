@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     playerTitle: document.getElementById('playerTitle'),
     btnPlayerToggle: document.getElementById('btnPlayerToggle'),
     btnPlayerNext: document.getElementById('btnPlayerNext'),
+    btnPlayerVoice: document.getElementById('btnPlayerVoice'),
     btnPlayerSpeed: document.getElementById('btnPlayerSpeed'),
     btnPlayerClose: document.getElementById('btnPlayerClose'),
     wakeLockBadge: document.getElementById('wakeLockBadge')
@@ -51,6 +52,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   const ttsPlayer = new LawTTSPlayer();
   if (el.btnPlayerSpeed) {
     el.btnPlayerSpeed.textContent = `${ttsPlayer.rate.toFixed(1)}x`;
+  }
+
+  function updateVoiceButtonVisibility() {
+    if (el.btnPlayerVoice) {
+      if (ttsPlayer.availableVoices && ttsPlayer.availableVoices.length > 1) {
+        el.btnPlayerVoice.style.display = 'inline-flex';
+        const vName = ttsPlayer.selectedVoice?.name || '人聲';
+        el.btnPlayerVoice.title = `切換發音人聲（目前：${vName}）`;
+      } else {
+        el.btnPlayerVoice.style.display = 'none';
+      }
+    }
+  }
+
+  updateVoiceButtonVisibility();
+  if (window.speechSynthesis) {
+    const origHandler = window.speechSynthesis.onvoiceschanged;
+    window.speechSynthesis.onvoiceschanged = () => {
+      if (origHandler) origHandler();
+      ttsPlayer.initVoices();
+      updateVoiceButtonVisibility();
+    };
   }
 
   // Apply Theme & Font size
@@ -661,6 +684,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     e.stopPropagation();
     ttsPlayer.skipNext();
+  });
+
+  el.btnPlayerVoice?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newVoice = ttsPlayer.cycleVoice();
+    if (newVoice) {
+      updateVoiceButtonVisibility();
+      showToast(`已切換聲音人聲：${newVoice.name}`);
+    }
   });
 
   el.btnPlayerSpeed?.addEventListener('click', (e) => {

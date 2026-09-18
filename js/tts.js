@@ -17,6 +17,7 @@ class LawTTSPlayer {
     this.onNextArticle = null;
     this.wakeLock = null;
     this.hasWakeLockSupport = ('wakeLock' in navigator);
+    this.availableVoices = [];
 
     this.initVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -101,42 +102,99 @@ class LawTTSPlayer {
     const voices = this.synth.getVoices();
     if (!voices || voices.length === 0) return;
 
-    // 優先挑選台灣繁體中文 (zh-TW) 自然高品質人聲
-    const twVoices = voices.filter(v => 
-      v.lang === 'zh-TW' || v.lang === 'zh_TW' || (v.lang && v.lang.toLowerCase() === 'zh-hant-tw')
-    );
-    const zhVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
-    const candidates = twVoices.length > 0 ? twVoices : zhVoices;
+    // 取得所有中文人聲（包含繁體與一般中文），並排序讓繁體中文排在前面
+    const zhVoices = voices.filter(v => v.lang && (v.lang.startsWith('zh') || v.lang.includes('cmn')));
+    zhVoices.sort((a, b) => {
+      const aIsTW = (a.lang === 'zh-TW' || a.lang === 'zh_TW' || a.lang.toLowerCase() === 'zh-hant-tw');
+      const bIsTW = (b.lang === 'zh-TW' || b.lang === 'zh_TW' || b.lang.toLowerCase() === 'zh-hant-tw');
+      if (aIsTW && !bIsTW) return -1;
+      if (!aIsTW && bIsTW) return 1;
+      return 0;
+    });
+    this.availableVoices = zhVoices;
 
-    // 高品質人聲優先順序（微軟自然人聲、蘋果 Siri/美佳、Google 國語）
-    const priorityKeywords = [
-      'Natural', 'Online', 'Neural', 
-      'HsiaoChen', 'Hsiao-Chen', 'Yating', 'Ya-Ting', 
-      'Mei-Jia', 'Meijia', 'Siri', 
-      'Google 國語', 'Google'
-    ];
-
-    let chosen = null;
-    for (const kw of priorityKeywords) {
-      chosen = candidates.find(v => v.name && v.name.includes(kw));
-      if (chosen) break;
+    // 優先還原使用者自選之語音偏好
+    const savedVoiceName = localStorage.getItem('val_tts_voice');
+    if (savedVoiceName) {
+      this.selectedVoice = zhVoices.find(v => v.name === savedVoiceName) || null;
     }
 
-    this.selectedVoice = chosen || candidates[0] || null;
+    if (!this.selectedVoice && zhVoices.length > 0) {
+      // 預設高品質人聲優先順序（微軟自然人聲、蘋果 Siri/美佳增強版、Google 國語）
+      const priorityKeywords = [
+        'Natural', 'Online', 'Neural', 
+        'HsiaoChen', 'Hsiao-Chen', 'Yating', 'Ya-Ting', 
+        'Mei-Jia', 'Meijia', 'Siri', 
+        'Google 國語', 'Google'
+      ];
+
+      let chosen = null;
+      for (const kw of priorityKeywords) {
+        chosen = zhVoices.find(v => v.name && v.name.includes(kw));
+        if (chosen) break;
+      }
+      this.selectedVoice = chosen || zhVoices[0];
+    }
   }
 
   /**
-   * 整理條文文字為自然語音朗讀文字
-   * @param {string} rawNo 條號字串（例如「第 1 條」）
+   * 切換下一種可用中文人聲（男聲/女聲/各系統音色切換）
+   */
+  cycleVoice() {
+    if (!this.availableVoices || this.availableVoices.length <= 1) return null;
+    const currentIdx = this.availableVoices.findIndex(v => v.name === this.selectedVoice?.name);
+    const nextIdx = (currentIdx + 1) % this.availableVoices.length;
+    this.selectedVoice = this.availableVoices[nextIdx];
+    localStorage.setItem('val_tts_voice', this.selectedVoice.name);
+
+    // 若正在播放中，無縫以新音色重新朗讀當前同一條文
+    if ((this.isPlaying || this.isPaused) && this.currentArticleData) {
+      const d = { ...this.currentArticleData };
+      this.stop(false);
+      setTimeout(() => {
+        this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
+      }, 80);
+    }
+    return this.selectedVoice;
+  }
+
+  /**
+   * 整理條文文字為具備自然抑揚頓挫、清晰語意層次與呼吸節奏的朗讀文字
+   * @param {string} rawNo 條號字串（例如「第 1 條」或「第 34-1 條」）
    * @param {string[]} paragraphs 條文段落陣列
-   * @param {string|null} lawName 法規名稱（若未指定或為 null 則不唸出，避免條條重複唸法規名稱）
+   * @param {string|null} lawName 法規名稱（若未指定或為 null 則不唸出）
    */
   prepareSpeechText(rawNo, paragraphs, lawName = null) {
-    // 朗讀時以條號開頭（如「第一條。」），不重複唸「土地法 第一條」、「土地法 第二條」等法規名稱
-    let cleanText = lawName ? `${lawName}，${rawNo}。 ` : `${rawNo}。 `;
+    // 1. 條號發音正規化：將「第 34-1 條」修正為「第 34 條之 1」，避免被唸成「減一」或「dash」
+    let speechRawNo = rawNo.replace(/第\s*(\d+)-(\d+)\s*條/g, '第 $1 條之 $2');
+
+    // 2. 條號宣告帶入冒號提示，觸發播音式沉穩語調與 300ms 清晰停頓
+    let cleanText = lawName ? `${lawName}，${speechRawNo}：\n` : `${speechRawNo}：\n`;
+
     paragraphs.forEach((p, idx) => {
       let t = p.trim();
-      // 替換常用法條符號、分數比例與度量衡單位，讓語音更通順自然
+      if (!t) return;
+
+      // 3. 條款目次層級化（賦予各款、各目鮮明的階層感與呼吸停頓）
+      // 款次：「一、」、「二、」轉為「第一款，」、「第二款，」
+      t = t.replace(/^([一二三四五六七八九十]+)、/gm, '第$1款，');
+      // 目次：「（一）」、「（二）」轉為「第一目，」、「第二目，」
+      t = t.replace(/（([一二三四五六七八九十]+)）/g, '第$1目，');
+
+      // 4. 複合括號與行政機關簡稱自然化（徹底清除不自然的逗號停頓）
+      t = t.replace(/直轄市、縣\s*（市）/g, '直轄市及縣市')
+           .replace(/縣\s*（市）/g, '縣市')
+           .replace(/鄉\s*（鎮、市、區）/g, '鄉鎮市區')
+           .replace(/鄉\s*（鎮、市）/g, '鄉鎮市')
+           .replace(/機關\s*（構）/g, '機關機構')
+           .replace(/處\s*（局）/g, '處局')
+           .replace(/公\s*（私）/g, '公私')
+           .replace(/（刪除）/g, '，本條文已刪除。');
+
+      // 5. 專門法規字詞發音修正（修復破音字與罕見字）
+      t = t.replace(/窳陋/g, '雨陋'); // 精準還原「yǔ lòu」讀音，避免機器人合成錯誤
+
+      // 6. 度量衡、法定多數決比例與估價專有名詞
       t = t.replace(/㎡|m²|m\^2/gi, '平方公尺')
            .replace(/([0-9]+)\s*ha\b/gi, '$1公頃')
            .replace(/％|%/g, '百分之')
@@ -145,30 +203,39 @@ class LawTTSPlayer {
            .replace(/3\/4|3／4/g, '四分之三')
            .replace(/1\/3|1／3/g, '三分之一')
            .replace(/1\/4|1／4/g, '四分之一')
-           .replace(/1\/5|1／5/g, '五分之一')
+           .replace(/1\/5|1\/5/g, '五分之一')
            .replace(/\//g, '除以')
            .replace(/×/g, '乘以')
            .replace(/＋/g, '加上')
            .replace(/－/g, '減去')
            .replace(/＝/g, '等於')
-           .replace(/（/g, '，')
-           .replace(/）/g, '，')
-           .replace(/「|」|『|』/g, '，')
            .replace(/NOI/gi, '淨營運收益')
            .replace(/DCF/gi, '折現現金流量')
            .replace(/REITs/gi, '不動產投資信託')
            .replace(/LTV/gi, '貸款成數')
            .replace(/Cap\s*Rate/gi, '收益資本化率');
 
-      // 替換條文中的連續逗號
-      t = t.replace(/，{2,}/g, '，');
+      // 7. 長句語意斷句與韻律呼吸點植入（創造抑揚頓挫的核心技術）
+      // 在缺乏標點的長條件句關鍵轉折詞前置或後置適度補上逗號，觸發語音引擎的聲調微揚與自然換氣
+      t = t.replace(/者([應並由得須其向])(?![，。；：])/g, '者，$1')
+           .replace(/時([應並由得須其向])(?![，。；：])/g, '時，$1')
+           .replace(/後([應並由得須其向])(?![，。；：])/g, '後，$1')
+           .replace(/(?<![，。；：\s])但(?=[其有本此若])/g, '，但')
+           .replace(/；其有/g, '；其有')
+           .replace(/前項情形([，。])/g, '前項情形$1');
+
+      // 8. 清理多餘符號與括號
+      t = t.replace(/[（(「」『』）)]/g, '，')
+           .replace(/，{2,}/g, '，')
+           .replace(/，([。；：！？])/g, '$1');
 
       if (!/[。；：！？]$/.test(t)) {
-        cleanText += t + '。 ';
+        cleanText += t + '。\n';
       } else {
-        cleanText += t + ' ';
+        cleanText += t + '\n';
       }
     });
+
     return cleanText.trim();
   }
 
@@ -202,7 +269,7 @@ class LawTTSPlayer {
       utterance.voice = this.selectedVoice;
     }
     utterance.rate = this.rate;
-    utterance.pitch = 1.0;
+    utterance.pitch = 1.02;
 
     utterance.onstart = () => {
       if (this.currentUtterance !== utterance) return;
@@ -232,7 +299,7 @@ class LawTTSPlayer {
           if (this.onNextArticle) {
             this.onNextArticle(currentNum);
           }
-        }, 80);
+        }, 320);
       } else {
         this.releaseWakeLock();
         if ('mediaSession' in navigator) {
