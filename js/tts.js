@@ -99,17 +99,30 @@ class LawTTSPlayer {
   initVoices() {
     if (!this.synth) return;
     const voices = this.synth.getVoices();
-    // 優先挑選台灣繁體中文 (zh-TW) 自然人聲
-    const twVoices = voices.filter(v => v.lang === 'zh-TW' || v.lang === 'zh_TW');
-    const cnVoices = voices.filter(v => v.lang.startsWith('zh'));
+    if (!voices || voices.length === 0) return;
 
-    if (twVoices.length > 0) {
-      // 優先挑選高品質人聲 (如 HanHan, Yating, HsiaoChen, Mei-Jia)
-      const premium = twVoices.find(v => v.name.includes('HsiaoChen') || v.name.includes('Yating') || v.name.includes('Mei-Jia') || v.name.includes('Natural'));
-      this.selectedVoice = premium || twVoices[0];
-    } else if (cnVoices.length > 0) {
-      this.selectedVoice = cnVoices[0];
+    // 優先挑選台灣繁體中文 (zh-TW) 自然高品質人聲
+    const twVoices = voices.filter(v => 
+      v.lang === 'zh-TW' || v.lang === 'zh_TW' || (v.lang && v.lang.toLowerCase() === 'zh-hant-tw')
+    );
+    const zhVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+    const candidates = twVoices.length > 0 ? twVoices : zhVoices;
+
+    // 高品質人聲優先順序（微軟自然人聲、蘋果 Siri/美佳、Google 國語）
+    const priorityKeywords = [
+      'Natural', 'Online', 'Neural', 
+      'HsiaoChen', 'Hsiao-Chen', 'Yating', 'Ya-Ting', 
+      'Mei-Jia', 'Meijia', 'Siri', 
+      'Google 國語', 'Google'
+    ];
+
+    let chosen = null;
+    for (const kw of priorityKeywords) {
+      chosen = candidates.find(v => v.name && v.name.includes(kw));
+      if (chosen) break;
     }
+
+    this.selectedVoice = chosen || candidates[0] || null;
   }
 
   /**
@@ -123,8 +136,16 @@ class LawTTSPlayer {
     let cleanText = lawName ? `${lawName}，${rawNo}。 ` : `${rawNo}。 `;
     paragraphs.forEach((p, idx) => {
       let t = p.trim();
-      // 替換常用法條符號，讓語音更通順
-      t = t.replace(/％/g, '百分之')
+      // 替換常用法條符號、分數比例與度量衡單位，讓語音更通順自然
+      t = t.replace(/㎡|m²|m\^2/gi, '平方公尺')
+           .replace(/([0-9]+)\s*ha\b/gi, '$1公頃')
+           .replace(/％|%/g, '百分之')
+           .replace(/1\/2|1／2/g, '二分之一')
+           .replace(/2\/3|2／3/g, '三分之二')
+           .replace(/3\/4|3／4/g, '四分之三')
+           .replace(/1\/3|1／3/g, '三分之一')
+           .replace(/1\/4|1／4/g, '四分之一')
+           .replace(/1\/5|1／5/g, '五分之一')
            .replace(/\//g, '除以')
            .replace(/×/g, '乘以')
            .replace(/＋/g, '加上')
@@ -132,9 +153,16 @@ class LawTTSPlayer {
            .replace(/＝/g, '等於')
            .replace(/（/g, '，')
            .replace(/）/g, '，')
+           .replace(/「|」|『|』/g, '，')
            .replace(/NOI/gi, '淨營運收益')
            .replace(/DCF/gi, '折現現金流量')
-           .replace(/REITs/gi, '不動產投資信託');
+           .replace(/REITs/gi, '不動產投資信託')
+           .replace(/LTV/gi, '貸款成數')
+           .replace(/Cap\s*Rate/gi, '收益資本化率');
+
+      // 替換條文中的連續逗號
+      t = t.replace(/，{2,}/g, '，');
+
       if (!/[。；：！？]$/.test(t)) {
         cleanText += t + '。 ';
       } else {
