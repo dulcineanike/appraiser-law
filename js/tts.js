@@ -22,8 +22,8 @@ class LawTTSPlayer {
     // 音色與音調調節支援（標準 / 沉穩男音 / 清亮女音，解決手機單一人聲無法換聲之限制）
     this.timbreModes = [
       { id: 'standard', name: '標準原聲', pitch: 1.0, icon: '🗣️' },
-      { id: 'male', name: '沉穩男音', pitch: 0.82, icon: '👨' },
-      { id: 'female', name: '清亮女音', pitch: 1.18, icon: '👩' }
+      { id: 'male', name: '沉穩男音', pitch: 0.80, icon: '👨' },
+      { id: 'female', name: '清亮女音', pitch: 1.20, icon: '👩' }
     ];
     this.timbreIndex = parseInt(localStorage.getItem('val_tts_timbre_idx') || '0', 10);
     if (isNaN(this.timbreIndex) || this.timbreIndex < 0 || this.timbreIndex >= this.timbreModes.length) {
@@ -115,24 +115,28 @@ class LawTTSPlayer {
     const voices = this.synth.getVoices();
     if (!voices || voices.length === 0) return;
 
-    // 取得所有中文人聲（包含繁體與一般中文），並排序讓繁體中文排在前面
-    const zhVoices = voices.filter(v => v.lang && (v.lang.startsWith('zh') || v.lang.includes('cmn')));
-    zhVoices.sort((a, b) => {
-      const aIsTW = (a.lang === 'zh-TW' || a.lang === 'zh_TW' || a.lang.toLowerCase() === 'zh-hant-tw');
-      const bIsTW = (b.lang === 'zh-TW' || b.lang === 'zh_TW' || b.lang.toLowerCase() === 'zh-hant-tw');
-      if (aIsTW && !bIsTW) return -1;
-      if (!aIsTW && bIsTW) return 1;
-      return 0;
+    // 嚴格篩選台灣繁體中文人聲（排除香港粵語、大陸普通話，避免在 iOS/手機上產生無效切換）
+    const twVoices = voices.filter(v => {
+      if (!v.lang) return false;
+      const l = v.lang.toLowerCase();
+      const n = (v.name || '').toLowerCase();
+      return l === 'zh-tw' || l === 'zh_tw' || l === 'zh-hant-tw' || l === 'cmn-tw' || 
+             n.includes('taiwan') || n.includes('臺灣') || n.includes('台灣') || n.includes('meijia') || n.includes('mei-jia');
     });
-    this.availableVoices = zhVoices;
+
+    if (twVoices.length > 0) {
+      this.availableVoices = twVoices;
+    } else {
+      this.availableVoices = voices.filter(v => v.lang && (v.lang.startsWith('zh') || v.lang.includes('cmn')));
+    }
 
     // 優先還原使用者自選之語音偏好
     const savedVoiceName = localStorage.getItem('val_tts_voice');
     if (savedVoiceName) {
-      this.selectedVoice = zhVoices.find(v => v.name === savedVoiceName) || null;
+      this.selectedVoice = this.availableVoices.find(v => v.name === savedVoiceName) || null;
     }
 
-    if (!this.selectedVoice && zhVoices.length > 0) {
+    if (!this.selectedVoice && this.availableVoices.length > 0) {
       // 預設高品質人聲優先順序（微軟自然人聲、蘋果 Siri/美佳增強版、Google 國語）
       const priorityKeywords = [
         'Natural', 'Online', 'Neural', 
@@ -143,10 +147,10 @@ class LawTTSPlayer {
 
       let chosen = null;
       for (const kw of priorityKeywords) {
-        chosen = zhVoices.find(v => v.name && v.name.includes(kw));
+        chosen = this.availableVoices.find(v => v.name && v.name.includes(kw));
         if (chosen) break;
       }
-      this.selectedVoice = chosen || zhVoices[0];
+      this.selectedVoice = chosen || this.availableVoices[0];
     }
   }
 
@@ -160,13 +164,10 @@ class LawTTSPlayer {
     this.selectedVoice = this.availableVoices[nextIdx];
     localStorage.setItem('val_tts_voice', this.selectedVoice.name);
 
-    // 若正在播放中，無縫以新音色重新朗讀當前同一條文
+    // 若正在播放中，無縫以新音色重新朗讀當前同一條文（同步執行以滿足 iOS 觸摸手勢要求）
     if ((this.isPlaying || this.isPaused) && this.currentArticleData) {
       const d = { ...this.currentArticleData };
-      this.stop(false);
-      setTimeout(() => {
-        this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
-      }, 80);
+      this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
     }
     return this.selectedVoice;
   }
@@ -210,13 +211,10 @@ class LawTTSPlayer {
     localStorage.setItem('val_tts_pitch', this.pitch.toString());
     localStorage.setItem('val_tts_timbre_idx', this.timbreIndex.toString());
 
-    // 若正在播放中，無縫以新音調重新朗讀當前同一條文
+    // 若正在播放中，無縫以新音調重新朗讀當前同一條文（同步執行以滿足 iOS 觸摸手勢要求）
     if ((this.isPlaying || this.isPaused) && this.currentArticleData) {
       const d = { ...this.currentArticleData };
-      this.stop(false);
-      setTimeout(() => {
-        this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
-      }, 80);
+      this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
     }
 
     return {
