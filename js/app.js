@@ -56,13 +56,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function updateVoiceButtonVisibility() {
     if (el.btnPlayerVoice) {
-      if (ttsPlayer.availableVoices && ttsPlayer.availableVoices.length > 1) {
-        el.btnPlayerVoice.style.display = 'inline-flex';
-        const vName = ttsPlayer.selectedVoice?.name || '人聲';
-        el.btnPlayerVoice.title = `切換發音人聲（目前：${vName}）`;
-      } else {
-        el.btnPlayerVoice.style.display = 'none';
-      }
+      el.btnPlayerVoice.style.display = 'inline-flex';
+      const info = ttsPlayer.getCurrentVoiceOrTimbreInfo();
+      el.btnPlayerVoice.textContent = info.icon;
+      el.btnPlayerVoice.title = info.title;
     }
   }
 
@@ -689,10 +686,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   el.btnPlayerVoice?.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const newVoice = ttsPlayer.cycleVoice();
-    if (newVoice) {
+    const res = ttsPlayer.cycleVoiceOrTimbre();
+    if (res) {
       updateVoiceButtonVisibility();
-      showToast(`已切換聲音人聲：${newVoice.name}`);
+      if (res.type === 'timbre') {
+        showToast(`已切換音色：${res.icon} ${res.name}`);
+      } else {
+        showToast(`已切換人聲：${res.icon} ${res.name}`);
+      }
     }
   });
 

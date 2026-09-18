@@ -1053,7 +1053,7 @@ body {
   transition: all 0.15s ease;
 }
 
-#btnPlayerToggle, #btnPlayerNext {
+#btnPlayerToggle, #btnPlayerNext, #btnPlayerVoice {
   width: 28px;
   height: 28px;
   padding: 0;

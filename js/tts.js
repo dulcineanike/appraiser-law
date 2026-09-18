@@ -19,6 +19,19 @@ class LawTTSPlayer {
     this.hasWakeLockSupport = ('wakeLock' in navigator);
     this.availableVoices = [];
 
+    // 音色與音調調節支援（標準 / 沉穩男音 / 清亮女音，解決手機單一人聲無法換聲之限制）
+    this.timbreModes = [
+      { id: 'standard', name: '標準原聲', pitch: 1.0, icon: '🗣️' },
+      { id: 'male', name: '沉穩男音', pitch: 0.82, icon: '👨' },
+      { id: 'female', name: '清亮女音', pitch: 1.18, icon: '👩' }
+    ];
+    this.timbreIndex = parseInt(localStorage.getItem('val_tts_timbre_idx') || '0', 10);
+    if (isNaN(this.timbreIndex) || this.timbreIndex < 0 || this.timbreIndex >= this.timbreModes.length) {
+      this.timbreIndex = 0;
+    }
+    const savedPitch = parseFloat(localStorage.getItem('val_tts_pitch'));
+    this.pitch = !isNaN(savedPitch) ? savedPitch : this.timbreModes[this.timbreIndex].pitch;
+
     this.initVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
       speechSynthesis.onvoiceschanged = () => this.initVoices();
@@ -156,6 +169,86 @@ class LawTTSPlayer {
       }, 80);
     }
     return this.selectedVoice;
+  }
+
+  /**
+   * 取得當前人聲或音色之顯示資訊（供 UI 按鈕呈現圖示與標題）
+   */
+  getCurrentVoiceOrTimbreInfo() {
+    if (this.availableVoices && this.availableVoices.length > 1) {
+      const v = this.selectedVoice || this.availableVoices[0];
+      const name = v?.name || '';
+      const isMale = /yunxi|yunjian|yunyang|danny|zhiwei|male|男/i.test(name);
+      const isFemale = /hsiaochen|xiaoxiao|yating|meijia|mei-jia|female|女|siri/i.test(name);
+      const icon = isMale ? '👨' : (isFemale ? '👩' : '🗣️');
+      return {
+        type: 'voice',
+        name: v?.name || '系統中文人聲',
+        icon: icon,
+        pitch: this.pitch,
+        title: `切換人聲（目前：${v?.name || '預設'}）`
+      };
+    } else {
+      const mode = this.timbreModes[this.timbreIndex] || this.timbreModes[0];
+      return {
+        type: 'timbre',
+        name: mode.name,
+        icon: mode.icon,
+        pitch: mode.pitch,
+        title: `切換音色（目前：${mode.name}）`
+      };
+    }
+  }
+
+  /**
+   * 切換下一種音色模式（標準 / 沉穩男音 / 清亮女音）
+   */
+  cycleTimbre() {
+    this.timbreIndex = (this.timbreIndex + 1) % this.timbreModes.length;
+    const mode = this.timbreModes[this.timbreIndex];
+    this.pitch = mode.pitch;
+    localStorage.setItem('val_tts_pitch', this.pitch.toString());
+    localStorage.setItem('val_tts_timbre_idx', this.timbreIndex.toString());
+
+    // 若正在播放中，無縫以新音調重新朗讀當前同一條文
+    if ((this.isPlaying || this.isPaused) && this.currentArticleData) {
+      const d = { ...this.currentArticleData };
+      this.stop(false);
+      setTimeout(() => {
+        this.play(d.lawName, d.rawNo, d.num, d.paragraphs, d.autoNext, d.includeLawName);
+      }, 80);
+    }
+
+    return {
+      type: 'timbre',
+      name: mode.name,
+      icon: mode.icon,
+      pitch: mode.pitch,
+      description: `音色：${mode.icon} ${mode.name}`
+    };
+  }
+
+  /**
+   * 智慧切換發音人聲或音色
+   * - 當系統有多個人聲時（如電腦版）：循環切換真實中文人聲（微軟自然人聲男/女聲等）
+   * - 當系統只有單一人聲時（如手機 iOS Safari/Android）：循環切換音色模式（標準 / 沉穩男音 / 清亮女音）
+   */
+  cycleVoiceOrTimbre() {
+    if (this.availableVoices && this.availableVoices.length > 1) {
+      const v = this.cycleVoice();
+      const isMale = /yunxi|yunjian|yunyang|danny|zhiwei|male|男/i.test(v?.name || '');
+      const isFemale = /hsiaochen|xiaoxiao|yating|meijia|mei-jia|female|女|siri/i.test(v?.name || '');
+      const icon = isMale ? '👨' : (isFemale ? '👩' : '🗣️');
+      return {
+        type: 'voice',
+        name: v?.name || '系統中文人聲',
+        icon: icon,
+        pitch: this.pitch,
+        description: `人聲：${v?.name || ''}`
+      };
+    } else {
+      return this.cycleTimbre();
+    }
   }
 
   /**
@@ -323,7 +416,7 @@ class LawTTSPlayer {
       utterance.voice = this.selectedVoice;
     }
     utterance.rate = this.rate;
-    utterance.pitch = 1.02;
+    utterance.pitch = this.pitch || 1.0;
 
     utterance.onstart = () => {
       if (this.currentUtterance !== utterance) return;
