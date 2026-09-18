@@ -15,10 +15,84 @@ class LawTTSPlayer {
     this.currentArticleData = null;
     this.onStatusChange = null;
     this.onNextArticle = null;
+    this.wakeLock = null;
+    this.hasWakeLockSupport = ('wakeLock' in navigator);
 
     this.initVoices();
     if (speechSynthesis.onvoiceschanged !== undefined) {
       speechSynthesis.onvoiceschanged = () => this.initVoices();
+    }
+    this.initWakeLockListeners();
+  }
+
+  initWakeLockListeners() {
+    // 當頁面從背景（如切換分頁或下拉通知中心）返回前景時，若仍在朗讀則重新取得 Wake Lock
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible' && this.isPlaying && !this.isPaused) {
+        await this.requestWakeLock();
+      }
+    });
+  }
+
+  /**
+   * 請求螢幕常亮喚醒鎖（防止手機自動休眠黑屏中斷朗讀）
+   */
+  async requestWakeLock() {
+    if (!this.hasWakeLockSupport) return false;
+    try {
+      if (!this.wakeLock) {
+        this.wakeLock = await navigator.wakeLock.request('screen');
+        this.wakeLock.addEventListener('release', () => {
+          this.wakeLock = null;
+          this.notifyStatus(this.isPlaying ? (this.isPaused ? 'paused' : 'playing') : 'stopped');
+        });
+        this.notifyStatus(this.isPlaying ? (this.isPaused ? 'paused' : 'playing') : 'stopped');
+      }
+      return true;
+    } catch (err) {
+      console.warn('Wake Lock request error:', err);
+      return false;
+    }
+  }
+
+  /**
+   * 釋放螢幕常亮喚醒鎖（恢復系統預設休眠省電）
+   */
+  async releaseWakeLock() {
+    if (this.wakeLock) {
+      try {
+        await this.wakeLock.release();
+      } catch (err) {
+        console.warn('Wake Lock release error:', err);
+      }
+      this.wakeLock = null;
+      this.notifyStatus(this.isPlaying ? (this.isPaused ? 'paused' : 'playing') : 'stopped');
+    }
+  }
+
+  /**
+   * 更新 Media Session API（提供鎖定畫面與控制中心基礎播放狀態與操作）
+   */
+  updateMediaSession(lawName, rawNo) {
+    if (!('mediaSession' in navigator)) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: `${rawNo} - ${lawName}`,
+        artist: '不動產估價小六法',
+        album: '法規條文連續朗讀',
+        artwork: [
+          { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png' }
+        ]
+      });
+      navigator.mediaSession.playbackState = 'playing';
+
+      navigator.mediaSession.setActionHandler('play', () => this.resume());
+      navigator.mediaSession.setActionHandler('pause', () => this.pause());
+      navigator.mediaSession.setActionHandler('nexttrack', () => this.skipNext());
+      navigator.mediaSession.setActionHandler('stop', () => this.stop());
+    } catch (e) {
+      // 忽略部分瀏覽器對特定動作的限制
     }
   }
 
@@ -90,6 +164,10 @@ class LawTTSPlayer {
     this.currentArticleData = { lawName, rawNo, num, paragraphs, autoNext, includeLawName };
     const speechText = this.prepareSpeechText(rawNo, paragraphs, includeLawName ? lawName : null);
 
+    // 啟動螢幕常亮喚醒鎖與更新 Media Session 控制
+    this.requestWakeLock();
+    this.updateMediaSession(lawName, rawNo);
+
     const utterance = new SpeechSynthesisUtterance(speechText);
     utterance.lang = 'zh-TW';
     if (this.selectedVoice) {
@@ -102,6 +180,10 @@ class LawTTSPlayer {
       if (this.currentUtterance !== utterance) return;
       this.isPlaying = true;
       this.isPaused = false;
+      this.requestWakeLock();
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'playing';
+      }
       this.notifyStatus('playing');
     };
 
@@ -123,6 +205,11 @@ class LawTTSPlayer {
             this.onNextArticle(currentNum);
           }
         }, 80);
+      } else {
+        this.releaseWakeLock();
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'none';
+        }
       }
     };
 
@@ -137,6 +224,10 @@ class LawTTSPlayer {
       this.currentUtterance = null;
       this.isPlaying = false;
       this.isPaused = false;
+      this.releaseWakeLock();
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'none';
+      }
       this.notifyStatus('error');
     };
 
@@ -148,6 +239,10 @@ class LawTTSPlayer {
     if (this.synth && this.synth.speaking && !this.synth.paused) {
       this.synth.pause();
       this.isPaused = true;
+      this.releaseWakeLock();
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'paused';
+      }
       this.notifyStatus('paused');
     }
   }
@@ -156,6 +251,10 @@ class LawTTSPlayer {
     if (this.synth && this.synth.paused) {
       this.synth.resume();
       this.isPaused = false;
+      this.requestWakeLock();
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = 'playing';
+      }
       this.notifyStatus('playing');
     }
   }
@@ -179,7 +278,11 @@ class LawTTSPlayer {
     }
     this.isPlaying = false;
     this.isPaused = false;
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = 'none';
+    }
     if (notify) {
+      this.releaseWakeLock();
       this.notifyStatus('stopped');
     }
   }
@@ -225,7 +328,10 @@ class LawTTSPlayer {
 
   notifyStatus(status) {
     if (this.onStatusChange) {
-      this.onStatusChange(status, this.currentArticleData);
+      this.onStatusChange(status, this.currentArticleData, {
+        wakeLockActive: !!this.wakeLock,
+        hasWakeLockSupport: this.hasWakeLockSupport
+      });
     }
   }
 }

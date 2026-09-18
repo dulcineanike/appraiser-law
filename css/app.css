@@ -989,6 +989,29 @@ body {
   white-space: nowrap;
 }
 
+.wakelock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #b45309;
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+[data-theme="dark"] .wakelock-badge {
+  color: #fcd34d;
+  background-color: rgba(245, 158, 11, 0.18);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
 .pulse-dot {
   width: 8px;
   height: 8px;

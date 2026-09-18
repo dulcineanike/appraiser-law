@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     btnPlayerToggle: document.getElementById('btnPlayerToggle'),
     btnPlayerNext: document.getElementById('btnPlayerNext'),
     btnPlayerSpeed: document.getElementById('btnPlayerSpeed'),
-    btnPlayerClose: document.getElementById('btnPlayerClose')
+    btnPlayerClose: document.getElementById('btnPlayerClose'),
+    wakeLockBadge: document.getElementById('wakeLockBadge')
   };
 
   const ttsPlayer = new LawTTSPlayer();
@@ -589,7 +590,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // 設定語音朗讀回呼與浮動控制列
-  ttsPlayer.onStatusChange = (status, data) => {
+  ttsPlayer.onStatusChange = (status, data, extra) => {
     document.querySelectorAll('.article-card.reading').forEach(c => c.classList.remove('reading'));
     document.querySelectorAll('.btn-tool.btn-tts.active').forEach(b => {
       b.classList.remove('active');
@@ -601,6 +602,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       el.playerTitle.textContent = `朗讀中：《${data.lawName}》${data.rawNo}`;
       el.btnPlayerToggle.textContent = status === 'playing' ? '⏸' : '▶';
       el.btnPlayerToggle.title = status === 'playing' ? '暫停朗讀' : '繼續朗讀';
+
+      if (el.wakeLockBadge) {
+        if (extra && extra.wakeLockActive) {
+          el.wakeLockBadge.style.display = 'inline-flex';
+        } else {
+          el.wakeLockBadge.style.display = 'none';
+        }
+      }
 
       const card = document.getElementById(`art-${data.num}`);
       if (card) {
@@ -615,6 +624,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     } else {
       el.audioPlayerBar.classList.remove('active');
+      if (el.wakeLockBadge) {
+        el.wakeLockBadge.style.display = 'none';
+      }
     }
   };
 
@@ -630,6 +642,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     } else {
+      ttsPlayer.releaseWakeLock();
       showToast('已朗讀完本法規全部條文');
     }
   };
