@@ -18,7 +18,7 @@ def deploy():
     print(f"==================================================")
 
     # 執行 Surge 自動部署
-    cmd = ["npx.cmd", "surge", BASE_DIR, DOMAIN]
+    cmd = ["npx.cmd", "--yes", "surge", BASE_DIR, DOMAIN]
     p = subprocess.Popen(
         cmd,
         stdin=subprocess.PIPE,
