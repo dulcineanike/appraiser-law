@@ -1,5 +1,5 @@
 // 不動產及估價法規 PWA Service Worker
-const CACHE_NAME = 'val-law-v1.2.7';
+const CACHE_NAME = 'val-law-v1.2.8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

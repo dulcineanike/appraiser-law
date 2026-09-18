@@ -369,6 +369,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // 平滑滾動至指定條文卡片（僅滑動 mainContent 內部，徹底消除手機視窗抖動與亂跳問題）
+  function scrollToCard(card) {
+    if (!card || !el.mainContent) return;
+    const container = el.mainContent;
+    const cardRect = card.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const offsetTop = cardRect.top - containerRect.top + container.scrollTop;
+    container.scrollTo({
+      top: Math.max(0, offsetTop - 75),
+      behavior: 'smooth'
+    });
+  }
+
   // Render Reader View
   function renderReaderView(lawId, jumpArticleNo = null) {
     const law = state.lawsData.find(l => l.id === lawId) || state.lawsData[0];
@@ -461,7 +474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       setTimeout(() => {
         const targetEl = document.getElementById(`art-${jumpArticleNo}`);
         if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          scrollToCard(targetEl);
         }
       }, 100);
     } else {
@@ -595,7 +608,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           }
         } else {
           ttsPlayer.play(lawName, artNo, num, paragraphs, true);
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          scrollToCard(card);
         }
       });
     });
@@ -652,7 +665,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   ttsPlayer.onNextArticle = (currentNum) => {
-    const law = state.lawsData.find(l => l.id === state.currentLawId || l.name === ttsPlayer.currentArticleData?.lawName);
+    const currentLawName = ttsPlayer.currentArticleData?.lawName;
+    const law = (currentLawName && state.lawsData.find(l => l.name === currentLawName)) ||
+                state.lawsData.find(l => l.id === state.currentLawId);
     if (!law) return;
     const currentIdx = law.articles.findIndex(a => a.num === currentNum);
     if (currentIdx >= 0 && currentIdx + 1 < law.articles.length) {
@@ -660,7 +675,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       ttsPlayer.play(law.name, nextArt.rawNo, nextArt.num, nextArt.paragraphs, true);
       const nextCard = document.getElementById(`art-${nextArt.num}`);
       if (nextCard) {
-        nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        scrollToCard(nextCard);
       }
     } else {
       ttsPlayer.releaseWakeLock();
@@ -1081,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       el.modalOverlay.classList.remove('open');
       const target = document.getElementById(`art-${val}`);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        scrollToCard(target);
         target.classList.add('highlighted');
         setTimeout(() => target.classList.remove('highlighted'), 2000);
       } else {
