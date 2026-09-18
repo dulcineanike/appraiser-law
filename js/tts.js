@@ -78,7 +78,7 @@ class LawTTSPlayer {
     try {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: `${rawNo} - ${lawName}`,
-        artist: '不動產估價小六法',
+        artist: '不動產及估價法規',
         album: '法規條文連續朗讀',
         artwork: [
           { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png' },

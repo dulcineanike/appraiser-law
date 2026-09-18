@@ -1,4 +1,4 @@
-/* 不動產估價小六法專用樣式表 */
+/* 不動產及估價法規專用樣式表 */
 :root {
   --primary: #1d4ed8;
   --primary-hover: #1e40af;
@@ -106,6 +106,7 @@ body {
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .brand-badge {
@@ -1187,12 +1188,12 @@ body {
   }
 
   .brand-title {
-    font-size: 1.08rem;
+    font-size: 1.02rem;
   }
 
   .brand-badge {
-    font-size: 0.68rem;
-    padding: 1px 5px;
+    font-size: 0.65rem;
+    padding: 1px 4px;
   }
 
   .law-header-banner {
@@ -1282,10 +1283,16 @@ body {
   }
 }
 
+@media (max-width: 420px) {
+  .brand-badge {
+    display: none;
+  }
+}
+
 /* Compact Mobile Devices (<= 380px, e.g. iPhone SE, Galaxy A-series, 360px width) */
 @media (max-width: 380px) {
   .brand-title {
-    font-size: 1.02rem;
+    font-size: 0.94rem;
   }
 
   .brand-badge {

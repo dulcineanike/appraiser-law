@@ -1,8 +1,8 @@
 @echo off
 chcp 65001 >nul
-title 上傳估價小六法到 GitHub (dulcineanike)
+title 上傳不動產及估價法規到 GitHub (dulcineanike)
 echo ========================================================
-echo        正在準備將估價小六法推送到 GitHub 倉庫
+echo        正在準備將不動產及估價法規推送到 GitHub 倉庫
 echo        目標帳號: dulcineanike
 echo        倉庫網址: https://github.com/dulcineanike/appraiser-law
 echo ========================================================

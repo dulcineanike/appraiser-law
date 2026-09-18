@@ -1,7 +1,7 @@
 {
-  "name": "不動產估價小六法 - 全法規與技術公報知識庫",
-  "short_name": "估價小六法",
-  "description": "不動產估價師專用全法規、技術規則與公會公報資料庫，支援手機/電腦離線全文檢索與報告書一鍵引用",
+  "name": "不動產及估價法規 - 全法規與技術公報知識庫",
+  "short_name": "不動產及估價法規",
+  "description": "不動產及估價專業法規、技術規則與公會公報資料庫，支援手機/電腦離線全文檢索與報告書一鍵引用",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait-primary",
