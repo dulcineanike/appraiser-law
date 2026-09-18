@@ -159,14 +159,65 @@ class LawTTSPlayer {
   }
 
   /**
+   * 將阿拉伯數字轉為中文國字數字（例如 2 -> 二, 12 -> 十二, 34 -> 三十四）
+   * 徹底防止語音引擎把「第 2 條」誤當成量詞讀為「第兩條」
+   */
+  numberToChinese(numStr) {
+    const digits = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    const n = parseInt(numStr, 10);
+    if (isNaN(n)) return numStr;
+    if (n < 10) return digits[n];
+    if (n < 20) return (n === 10 ? '十' : '十' + digits[n % 10]);
+    if (n < 100) {
+      const tens = Math.floor(n / 10);
+      const units = n % 10;
+      return digits[tens] + '十' + (units > 0 ? digits[units] : '');
+    }
+    if (n < 1000) {
+      const hundreds = Math.floor(n / 100);
+      const remainder = n % 100;
+      const tens = Math.floor(remainder / 10);
+      const units = remainder % 10;
+      let res = digits[hundreds] + '百';
+      if (remainder === 0) return res;
+      if (tens === 0) return res + '零' + digits[units];
+      return res + digits[tens] + '十' + (units > 0 ? digits[units] : '');
+    }
+    return numStr;
+  }
+
+  /**
+   * 規範化法律序數發音（強制轉為中文字符，徹底根絕「第兩條」、「第兩項」之發音錯誤）
+   */
+  normalizeLegalOrdinals(text) {
+    if (!text) return '';
+    // 處理如「第 34-1 條」->「第三十四條之一」
+    text = text.replace(/第\s*(\d+)-(\d+)\s*條/g, (m, a, b) => '第' + this.numberToChinese(a) + '條之' + this.numberToChinese(b));
+    // 處理如「第 2 條之 1」->「第二條之一」
+    text = text.replace(/第\s*(\d+)\s*條之\s*(\d+)/g, (m, a, b) => '第' + this.numberToChinese(a) + '條之' + this.numberToChinese(b));
+    // 處理如「第 2 條」->「第二條」
+    text = text.replace(/第\s*(\d+)\s*條/g, (m, a) => '第' + this.numberToChinese(a) + '條');
+    // 處理如「第 2 項」->「第二項」
+    text = text.replace(/第\s*(\d+)\s*項/g, (m, a) => '第' + this.numberToChinese(a) + '項');
+    // 處理如「第 2 款」->「第二款」
+    text = text.replace(/第\s*(\d+)\s*款/g, (m, a) => '第' + this.numberToChinese(a) + '款');
+    // 處理如「第 2 目」->「第二目」
+    text = text.replace(/第\s*(\d+)\s*目/g, (m, a) => '第' + this.numberToChinese(a) + '目');
+    // 處理如「第 2 點」->「第二點」
+    text = text.replace(/第\s*(\d+)\s*點/g, (m, a) => '第' + this.numberToChinese(a) + '點');
+    return text;
+  }
+
+  /**
    * 整理條文文字為具備自然抑揚頓挫、清晰語意層次與呼吸節奏的朗讀文字
    * @param {string} rawNo 條號字串（例如「第 1 條」或「第 34-1 條」）
    * @param {string[]} paragraphs 條文段落陣列
    * @param {string|null} lawName 法規名稱（若未指定或為 null 則不唸出）
    */
   prepareSpeechText(rawNo, paragraphs, lawName = null) {
-    // 1. 條號發音正規化：將「第 34-1 條」修正為「第 34 條之 1」，避免被唸成「減一」或「dash」
-    let speechRawNo = rawNo.replace(/第\s*(\d+)-(\d+)\s*條/g, '第 $1 條之 $2');
+    // 1. 條號發音正規化：將「第 2 條」轉為「第二條」，「第 34-1 條」轉為「第三十四條之一」
+    // 強制以中文「二」發音，徹底解決語音引擎遇到阿拉伯數字「2」誤讀為「第兩條」之問題！
+    let speechRawNo = this.normalizeLegalOrdinals(rawNo);
 
     // 2. 條號宣告帶入冒號提示，觸發播音式沉穩語調與 300ms 清晰停頓
     let cleanText = lawName ? `${lawName}，${speechRawNo}：\n` : `${speechRawNo}：\n`;
@@ -174,6 +225,9 @@ class LawTTSPlayer {
     paragraphs.forEach((p, idx) => {
       let t = p.trim();
       if (!t) return;
+
+      // 條項款目序號中文正規化（防止文中引用的「第 2 條」、「第 2 項」被唸成「第兩條」）
+      t = this.normalizeLegalOrdinals(t);
 
       // 3. 條款目次層級化（賦予各款、各目鮮明的階層感與呼吸停頓）
       // 款次：「一、」、「二、」轉為「第一款，」、「第二款，」
